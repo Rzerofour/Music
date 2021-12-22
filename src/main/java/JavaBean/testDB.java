@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+@SuppressWarnings("SqlNoDataSourceInspection")
 public class testDB {
 
     public static void main(String[] args) throws Exception {
@@ -18,7 +19,7 @@ public class testDB {
 
     public User getUserByName(String name) throws Exception {
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-        Connection conn = DriverManager.getConnection("jdbc:ucanaccess://src\\main\\webapp\\data\\UserDB.accdb");
+        Connection conn = DriverManager.getConnection("jdbc:ucanaccess://src//main//webapp//data//UserDB.accdb");
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("select * from usertable where username='" + name + "'");
         rs.next();

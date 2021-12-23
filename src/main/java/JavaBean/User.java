@@ -1,6 +1,8 @@
 package JavaBean;
 
 public class User {
+    private int ID;
+    private boolean manager;
     private String userName;
     private String userPassword;
 
@@ -9,6 +11,22 @@ public class User {
 
     public String getUserName() {
         return this.userName;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int iD) {
+        ID = iD;
+    }
+
+    public boolean isManager() {
+        return manager;
+    }
+
+    public void setManager(boolean manager) {
+        this.manager = manager;
     }
 
     public void setUserName(String userName) {
@@ -23,3 +41,4 @@ public class User {
         this.userPassword = userPassword;
     }
 }
+

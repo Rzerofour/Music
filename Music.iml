@@ -41,6 +41,5 @@
         <jarDirectory url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/lib" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="@bootcss/v3.bootcss.com" level="application" />
   </component>
 </module>

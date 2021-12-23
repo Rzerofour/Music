@@ -9,171 +9,62 @@
     <%-- 上述3个meta标签必须放在最前面，任何其他内容都必须跟随其后！ --%>
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" href="image/icons8-musical-notes-24.png">
     <link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/theme/">
+    <link href="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.29/examples/cover/cover.css" rel="stylesheet">
 
     <title>Index</title>
 
     <%--Bootstrap--%>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-    <%--jQuery--%>
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <%--Bootstrap JavaScript--%>
-    <script src="js/bootstrap.min.js"></script>
     <%--FontAwesome--%>
     <link href="css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
-<i class="fa fa-check-circle" aria-hidden="true"></i>
-<i class="fa fa-check-circle" aria-hidden="true"></i>
-<i class="fa fa-check-circle" aria-hidden="true"></i>
-<i class="fa fa-check-circle" aria-hidden="true"></i>
-<i class="fa fa-check-circle" aria-hidden="true"></i>
-<div class="container-fluid">
-    <form class="form-inline">
-        <div class="form-group">
-            <label class="sr-only" for="exampleInputEmail3">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+<div class="site-wrapper">
+
+    <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+            <div class="masthead clearfix">
+                <div class="inner">
+                    <h3 class="masthead-brand">Cover</h3>
+                    <nav>
+                        <ul class="nav masthead-nav">
+                            <li class="active"><a href="#" one-link-mark="yes">Home</a></li>
+                            <li><a href="#" one-link-mark="yes">Features</a></li>
+                            <li><a href="#" one-link-mark="yes">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="inner cover">
+                <h1 class="cover-heading">Cover your page.</h1>
+                <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+                <p class="lead">
+                    <a href="#" class="btn btn-lg btn-default" one-link-mark="yes">Learn more</a>
+                </p>
+            </div>
+
+            <div class="mastfoot">
+                <div class="inner">
+                    <p>Cover template for <a href="https://getbootstrap.com/" one-link-mark="yes">Bootstrap</a>, by <a href="https://twitter.com/mdo" one-link-mark="yes">@mdo</a>.</p>
+                </div>
+            </div>
+
         </div>
-        <div class="form-group">
-            <label class="sr-only" for="exampleInputPassword3">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox"> Remember me
-            </label>
-        </div>
-        <button type="submit" class="btn btn-default">Sign in</button>
-    </form>
-    <div class="row">
-        <div class="col-md-6">
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td rowspan="2">1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@TwBootstrap</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-6">
-            <table class="table table-condensed">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+
     </div>
-    <div class="page-header">
-        <h1>Labels</h1>
-    </div>
-    <h1>
-        <span class="label label-default">Default</span>
-        <span class="label label-primary">Primary</span>
-        <span class="label label-success">Success</span>
-        <span class="label label-info">Info</span>
-        <span class="label label-warning">Warning</span>
-        <span class="label label-danger">Danger</span>
-    </h1>
-    <h2>
-        <span class="label label-default">Default</span>
-        <span class="label label-primary">Primary</span>
-        <span class="label label-success">Success</span>
-        <span class="label label-info">Info</span>
-        <span class="label label-warning">Warning</span>
-        <span class="label label-danger">Danger</span>
-    </h2>
-    <h3>
-        <span class="label label-default">Default</span>
-        <span class="label label-primary">Primary</span>
-        <span class="label label-success">Success</span>
-        <span class="label label-info">Info</span>
-        <span class="label label-warning">Warning</span>
-        <span class="label label-danger">Danger</span>
-    </h3>
-    <h4>
-        <span class="label label-default">Default</span>
-        <span class="label label-primary">Primary</span>
-        <span class="label label-success">Success</span>
-        <span class="label label-info">Info</span>
-        <span class="label label-warning">Warning</span>
-        <span class="label label-danger">Danger</span>
-    </h4>
-    <h5>
-        <span class="label label-default">Default</span>
-        <span class="label label-primary">Primary</span>
-        <span class="label label-success">Success</span>
-        <span class="label label-info">Info</span>
-        <span class="label label-warning">Warning</span>
-        <span class="label label-danger">Danger</span>
-    </h5>
-    <h6>
-        <span class="label label-default">Default</span>
-        <span class="label label-primary">Primary</span>
-        <span class="label label-success">Success</span>
-        <span class="label label-info">Info</span>
-        <span class="label label-warning">Warning</span>
-        <span class="label label-danger">Danger</span>
-    </h6>
-    <p>
-        <span class="label label-default">Default</span>
-        <span class="label label-primary">Primary</span>
-        <span class="label label-success">Success</span>
-        <span class="label label-info">Info</span>
-        <span class="label label-warning">Warning</span>
-        <span class="label label-danger">Danger</span>
-    </p>
+
 </div>
 </body>
+
+
+<%--jQuery--%>
+<script src="js/jquery-3.6.0.min.js"></script>
+<%--Bootstrap JavaScript--%>
+<script src="js/bootstrap.min.js"></script>

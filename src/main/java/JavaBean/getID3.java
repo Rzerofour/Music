@@ -14,7 +14,6 @@ public class getID3 {
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         Connection conn = DriverManager.getConnection("jdbc:ucanaccess://src//main//webapp//data//DataBase.accdb");
         Statement stmt = conn.createStatement();
-        String str="OPEN";
         File file = new File("C:\\Users\\Ahsilom\\eclipse-workspace\\Music\\src\\main\\webapp\\music");
         File[] fs = file.listFiles();
         for (File f : fs) {
@@ -23,8 +22,9 @@ public class getID3 {
                 ID3v2 id3v2Tag = mp3file.getId3v2Tag();
                 //System.out.println(id3v2Tag.getArtist());
                 //System.out.println(id3v2Tag.getTitle());
-                stmt.executeUpdate("INSERT INTO music(singer,title,url,uploader) VALUES ('"+id3v2Tag.getArtist()+"', " +
-                        "'"+id3v2Tag.getTitle()+"', '"+f+"', '"+str+"')");
+                stmt.executeUpdate("INSERT INTO music(singer,title,url,uploader) VALUES ('" + id3v2Tag.getArtist() +
+                        "', " +
+                        "'" + id3v2Tag.getTitle() + "', '" + f + "', '" + "PRESET" + "')");
             }
         }
         conn.close();

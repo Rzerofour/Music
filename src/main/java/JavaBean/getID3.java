@@ -12,9 +12,9 @@ import java.sql.Statement;
 public class getID3 {
     public static void main(String[] args) throws Exception {
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-        Connection conn = DriverManager.getConnection("jdbc:ucanaccess://src//main//webapp//data//DataBase.accdb");
+        Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
         Statement stmt = conn.createStatement();
-        File file = new File("C:\\Users\\Ahsilom\\eclipse-workspace\\Music\\src\\main\\webapp\\music");
+        File file = new File("src\\main\\webapp\\music");
         File[] fs = file.listFiles();
         for (File f : fs) {
             Mp3File mp3file = new Mp3File(f);
@@ -23,8 +23,7 @@ public class getID3 {
                 //System.out.println(id3v2Tag.getArtist());
                 //System.out.println(id3v2Tag.getTitle());
                 stmt.executeUpdate("INSERT INTO music(singer,title,url,uploader) VALUES ('" + id3v2Tag.getArtist() +
-                        "', " +
-                        "'" + id3v2Tag.getTitle() + "', '" + f + "', '" + "PRESET" + "')");
+                        "', " + "'" + id3v2Tag.getTitle() + "', '" + f + "', '" + "PRESET" + "')");
             }
         }
         conn.close();

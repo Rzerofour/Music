@@ -41,7 +41,7 @@
                     <div class="form-group">
                         <div class="col-md-4">
                             <input name="register" class="btn btn-lg btn-success btn-block" value="注册"
-                                   onclick="javascript:window.location.href='Register.jsp'">
+                                   onclick="window.location.href='Register.jsp'">
                         </div>
                         <div class="col-md-4">
                             <input class="btn btn-lg btn-primary btn-block" type="submit" value="登录">

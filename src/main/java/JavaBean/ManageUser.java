@@ -11,11 +11,7 @@ public class ManageUser {
     public static void main(String[] args) throws Exception {
         ManageUser mu = new ManageUser();
         ArrayList<User> pl = mu.getUserList();
-        User u = new User();
-        u.setUserName("111");
-        u.setUserPassword("111");
-        u.setManager(false);
-        mu.addUser(u);
+        System.out.println(pl.get(0).getUserName());
     }
 
     //管理员管理用户
@@ -32,6 +28,22 @@ public class ManageUser {
             User p = new User();
             p.setUserName(rs.getString("username"));
             p.setUserPassword(rs.getString("userpassword"));
+            p.setManager(rs.getBoolean("manager"));
+            List.add(p);
+        }
+        conn.close();
+        return List;
+    }
+
+    //返回数据库中所有管理员
+    public ArrayList<User> getManagerList() throws Exception {
+        Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+        Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
+        Statement stmt = conn.createStatement();
+        ArrayList<User> List = new ArrayList<User>();
+        ResultSet rs = stmt.executeQuery("select * from user where manager='" + true + "'");
+        while (rs.next()) {
+            User p = new User();
             p.setManager(rs.getBoolean("manager"));
             List.add(p);
         }

@@ -129,6 +129,18 @@ public class ManageMusic {
         conn.close();
     }
 
+    //修改歌曲判断是否歌曲名和歌手名重复
+    public boolean modifycheck(Music u) throws Exception {
+        Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+        Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
+        Statement stmt = conn.createStatement();
+        boolean bsuccess;
+        ResultSet rs =
+                stmt.executeQuery("select * from music where title='" + u.getTitle() + "' and singer='" + u.getSinger() + "'");
+        bsuccess = rs.next();
+        return bsuccess;
+    }
+
     //修改歌曲内容
     public void modifyMusic(Music u) throws Exception {
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");

@@ -36,7 +36,8 @@ public class Register {
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("select manager from user where ID='" + u.getID() + "'");
+        ResultSet rs =
+                stmt.executeQuery("select * from user where username='" + u.getUserName() + "' and manager='" + true + "'");
         boolean bSuccess;
         bSuccess = rs.next();
         conn.close();

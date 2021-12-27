@@ -24,7 +24,7 @@ public class ManageMusic {
         p.setTitle(rs.getString("title"));
         p.setSinger(rs.getString("singer"));
         p.setUrl(rs.getString("url"));
-        p.setLyricurl(rs.getString("lyricurl"));
+        p.setLyric(rs.getString("lyric"));
         p.setClass1(rs.getBoolean("class1"));
         p.setClass2(rs.getBoolean("class2"));
         p.setClass3(rs.getBoolean("class3"));
@@ -47,7 +47,7 @@ public class ManageMusic {
             p.setTitle(rs.getString("title"));
             p.setSinger(rs.getString("singer"));
             p.setUrl(rs.getString("url"));
-            p.setLyricurl(rs.getString("lyricurl"));
+            p.setLyric(rs.getString("lyric"));
             p.setClass1(rs.getBoolean("class1"));
             p.setClass2(rs.getBoolean("class2"));
             p.setClass3(rs.getBoolean("class3"));
@@ -71,7 +71,7 @@ public class ManageMusic {
             p.setTitle(rs.getString("title"));
             p.setSinger(rs.getString("singer"));
             p.setUrl(rs.getString("url"));
-            p.setLyricurl(rs.getString("lyricurl"));
+            p.setLyric(rs.getString("lyric"));
             p.setClass1(rs.getBoolean("class1"));
             p.setClass2(rs.getBoolean("class2"));
             p.setClass3(rs.getBoolean("class3"));
@@ -101,15 +101,16 @@ public class ManageMusic {
     }
 
     //添加歌曲
-    public void uploadMusic(String fileName) throws Exception {
+    public void uploadMusic(String fileName,String filePath) throws Exception {
 
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
         Statement stmt = conn.createStatement();
-        Mp3File mp3file = new Mp3File(fileName);
+        Mp3File mp3file = new Mp3File(filePath);
         if (mp3file.hasId3v2Tag()) {
             ID3v2 id3v2Tag = mp3file.getId3v2Tag();
-            stmt.executeUpdate("INSERT INTO music(singer,title,url) VALUES ('" + id3v2Tag.getArtist() + "', " + "'" + id3v2Tag.getTitle() + "', '" + fileName + "')");
+            stmt.executeUpdate("INSERT INTO music(singer,title,url,lyric) VALUES ('" + id3v2Tag.getArtist() + "', " +
+                    "'" + id3v2Tag.getTitle() + "', '" + "music/" +fileName +"', '" + id3v2Tag.getLyrics() +"')");
         }
 
         conn.close();
@@ -130,7 +131,7 @@ public class ManageMusic {
     }
 
     //修改歌曲判断是否歌曲名和歌手名重复
-    public boolean modifycheck(Music u) throws Exception {
+    public boolean modifyCheck(Music u) throws Exception {
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
         Statement stmt = conn.createStatement();

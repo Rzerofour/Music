@@ -57,7 +57,7 @@ public class AddUserServlet extends HttpServlet {
 					else {
 						b.addUser(u);
 						PrintWriter out= response.getWriter();
-						out.print("<script>alert('注册成功!');    window.location.href='ManageUser.jsp'</script>");
+						out.print("<script>alert('注册成功!');    window.location.href='ManageMusic.jsp?class=0'</script>");
 					}
 				}
 				else {

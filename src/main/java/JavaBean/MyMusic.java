@@ -6,7 +6,7 @@ public class MyMusic {
     private String title;
     private String singer;
     private String url;
-    private String lyricurl;
+    private String lyric;
     private boolean class1;
     private boolean class2;
     private boolean class3;
@@ -54,12 +54,12 @@ public class MyMusic {
         this.url = url;
     }
 
-    public String getLyricurl() {
-        return lyricurl;
+    public String getLyric() {
+        return lyric;
     }
 
-    public void setLyricurl(String lyricurl) {
-        this.lyricurl = lyricurl;
+    public void setLyric(String lyric) {
+        this.lyric = lyric;
     }
 
     public boolean isClass1() {

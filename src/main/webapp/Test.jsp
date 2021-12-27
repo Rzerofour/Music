@@ -22,21 +22,22 @@
     <%--FontAwesome--%>
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/Manage.css" rel="stylesheet">
-<%--TODO：播放页！！！--%>
-    <%
-        ManageMusic a = new ManageMusic();
-        ArrayList<Music> pl = a.getMusicList();
-    %>
-    <script>
 
+    <script>
+        // 上传框
         $('#uploadModal').modal()
         $(function () {
-        $('#modifyModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            var id=button.data('whatever');
-            var modal = $(this);
-            modal.find('.modal-body input[name=id]').val(id);
-        })
+            // 修改框
+            $('#modifyModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('whatever');
+                var modal = $(this);
+                modal.find('.modal-body input[name=id]').val(id);
+            })
+            // 分类导航
+            $(".class").click(function () {
+                $("#content").empty();
+            })
         })
     </script>
 </head>
@@ -45,14 +46,14 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="ManageMusic.jsp"><i class="fa fa-home fa-fw" aria-hidden="true"></i>音乐管理中心</a>
+            <a class="navbar-brand" href="ManageMusic.jsp?class=0"><i class="fa fa-home fa-fw"
+                                                                      aria-hidden="true"></i>个人管理中心</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="ManageUser.jsp">用户管理中心</a></li>
                 <li><a href="Login.jsp">退出中心</a></li>
             </ul>
-            <form class="navbar-form navbar-right" action="SearchResult.jsp" method="post">
+            <form class="navbar-form navbar-right" action="ManageMusic.jsp?class=0" method="post">
                 <div class="input-group">
                     <label for="partname" class="sr-only"></label>
                     <input type="text" class="form-control" id="partname" name="partname" placeholder="按歌名搜索...">
@@ -69,35 +70,15 @@
     <div class="row">
 
         <div class="col-sm-12  col-md-12  main">
-            <h1 class="page-header">在这里你可以...</h1>
+            <h1 class="page-header">编辑个人信息</h1>
 
             <div class="row placeholders">
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img src="image/icons8-upload-64.png"
-                         width="200" height="200" class="img-responsive img-circle" alt="上传">
-                    <h4>上传</h4>
 
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img src="image/icons8-edit-64.png"
-                         width="200" height="200" class="img-responsive img-circle" alt="修改">
-                    <h4>修改</h4>
 
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img src="image/icons8-trash-64.png"
-                         width="200" height="200" class="img-responsive img-circle" alt="删除">
-                    <h4>删除</h4>
-
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img src="image/icons8-search-64.png"
-                         width="200" height="200" class="img-responsive img-circle" alt="搜索">
-                    <h4>搜索</h4>
-                </div>
             </div>
 
             <h2 class="sub-header">曲库列表</h2>
+
 
             <label for="upload" class="sr-only"></label>
             <button type="button" name="upload" id="upload" data-toggle="modal" data-target="#uploadModal"
@@ -107,25 +88,31 @@
 
                 <div class="form-group">
                     <br>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
+                        <label for="classAll" class="sr-only"></label>
+                        <input name="classAll" id="classAll" class=" class btn btn-lg btn-default btn-block"
+                               value="全部歌曲"
+                               onclick="window.location.href='ManageMusic.jsp?class=0'">
+                    </div>
+                    <div class="col-md-2">
                         <label for="class1" class="sr-only"></label>
-                        <input name="class1" id="class1" class="btn btn-lg btn-default btn-block" value="class1"
-                               onclick="window.location.href='class1.jsp'">
+                        <input name="class1" id="class1" class="class btn btn-lg btn-default btn-block" value="分类1"
+                               onclick="window.location.href='ManageMusic.jsp?class=1'">
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label for="class2" class="sr-only"></label>
-                        <input name="class2" id="class2" class="btn btn-lg btn-default btn-block" value="class2"
-                               onclick="window.location.href='class2.jsp'">
+                        <input name="class2" id="class2" class="class btn btn-lg btn-default btn-block" value="分类2"
+                               onclick="window.location.href='ManageMusic.jsp?class=2'">
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label for="class3" class="sr-only"></label>
-                        <input name="class3" id="class3" class="btn btn-lg btn-default btn-block" value="class3"
-                               onclick="window.location.href='class3.jsp'">
+                        <input name="class3" id="class3" class="class btn btn-lg btn-default btn-block" value="分类3"
+                               onclick="window.location.href='ManageMusic.jsp?class=3'">
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label for="class4" class="sr-only"></label>
-                        <input name="class4" id="class4" class="btn btn-lg btn-default btn-block" value="class4"
-                               onclick="window.location.href='class4.jsp'">
+                        <input name="class4" id="class4" class="btn btn-lg btn-default btn-block" value="分类4"
+                               onclick="window.location.href='ManageMusic.jsp?class=4'">
                     </div>
                 </div>
 
@@ -133,39 +120,56 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <td>歌名</td>
-                        <td>歌手</td>
-                        <td colspan="2">操作</td>
+                        <th>歌名</th>
+                        <th>歌手</th>
+                        <th>播放</th>
+                        <th colspan="2">操作</th>
                     </tr>
                     </thead>
-                    <jsp:useBean id="Music" class="JavaBean.Music">
+                    <jsp:useBean id="Music" class="JavaBean.Music" scope="session">
                         <jsp:setProperty name="Music" property="*"/>
                     </jsp:useBean>
-                    <tbody>
+                    <tbody id="content">
                     <%
-                        for (Music p : pl) {
+                        String word = request.getParameter("partname");
+                        String classID = request.getParameter("class");
+                        //如果不搜索，根据class显示
+                        if (word == null) {
+                            switch (classID) {
+                                case "0": {%>
+                    <jsp:include page="classAll.jsp" flush="true"/>
+                    <%
+                            break;
+                        }
+                        case "1": {%>
+                    <jsp:include page="class1.jsp" flush="true"/>
+                    <%
+                            break;
+                        }
+                        case "2": {%>
+                    <jsp:include page="class2.jsp" flush="true"/>
+                    <%
+                            break;
+                        }
+                        case "3": {%>
+                    <jsp:include page="class3.jsp" flush="true"/>
+                    <%
+                            break;
+                        }
+                        case "4": {%>
+                    <jsp:include page="class4.jsp" flush="true"/>
+                    <%
+                                break;
+                            }
+                        }
+                    }
+                    //如果搜索，显示searchResult.jsp
+                    else {
                     %>
-                    <tr>
-                        <td><%=p.getID() %>
-                        </td>
-                        <td><%=p.getTitle() %>
-                        </td>
-                        <td><%=p.getSinger() %>
-                        </td>
-                        <td>
-                            <button type="button"  class="btn btn-link" data-toggle="modal"
-                                    data-target="#modifyModal" data-whatever="<%=p.getID() %>">修改
-                            </button>
-                        </td>
-                        <td>
-                            <button type="button"  class="btn btn-link"
-                                    onclick="window.location.href='ManageDeleteMusicServlet?MusicID=<%=p.getID() %>'">删除
-                            </button>
-                        </td>
-                    </tr>
-
-                    <%} %>
-
+                    <jsp:include page="SearchResult.jsp?partname=<%=word%>" flush="true"/>
+                    <%
+                        }
+                    %>
                     </tbody>
                 </table>
             </div>
@@ -186,7 +190,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="uploadFile">上传音乐</label>
-                        <input type="file" id="uploadFile" name="file" accept="audio/mp3,audio/wav,audio/ogg"
+                        <input type="file" id="uploadFile" name="file" accept="audio/mpeg,audio/wav,audio/ogg"
                                required="">
                         <p class="help-block">请上传MP3、Wav、Ogg格式文件！</p>
                     </div>
@@ -213,11 +217,11 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="id">ID</label>
-                        <input id="id" name='id' type='text' class="form-control"  value="" readonly>
+                        <input id="id" name='id' type='text' class="form-control" value="" readonly>
                         <label for="title">歌名</label>
-                        <input id="title" name='title'  type='text' class="form-control" placeholder="歌名" required="">
+                        <input id="title" name='title' type='text' class="form-control" placeholder="歌名" required="">
                         <label for="singer">歌手</label>
-                        <input id="singer" name='singer' type='text' class="form-control" placeholder="歌手" required="" >
+                        <input id="singer" name='singer' type='text' class="form-control" placeholder="歌手" required="">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -232,3 +236,4 @@
 
 </body>
 </html>
+s

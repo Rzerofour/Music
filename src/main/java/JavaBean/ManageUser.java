@@ -65,14 +65,7 @@ public class ManageUser {
 
 
     //增加用户
-    public void addUser(User u) throws Exception {
-
-        Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-        Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
-        Statement stmt = conn.createStatement();
-        stmt.executeUpdate("INSERT INTO user(username,userpassword,manager) " + "VALUES ('" + u.getUserName() + "','" + u.getUserPassword() + "','" + u.isManager() + "')");
-        conn.close();
-    }
+    //使用Register类方法实现
 
     //更新用户信息
     public void modifyUser(User u, String delName) throws Exception {

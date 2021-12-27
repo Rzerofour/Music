@@ -43,8 +43,8 @@ public class ManageUploadMusicServlet extends HttpServlet {
         // TODO Auto-generated method stub
         response.setCharacterEncoding("utf-8");
         response.setHeader("Content-Type", "text/html;charset=utf-8");
-        ManageMusic pm = new ManageMusic();
-        String uploadPath = "C:\\Users\\Ahsilom\\eclipse-workspace\\Music\\src\\main\\webapp\\music\\";
+        ManageMusic mm = new ManageMusic();
+        String uploadPath = "C:\\Program Files\\apache-tomcat-10.0.8\\webapps\\Music\\music\\";
         try {
             final Collection<Part> parts = request.getParts();
             for (final Part part : parts) {
@@ -52,14 +52,14 @@ public class ManageUploadMusicServlet extends HttpServlet {
                     part.write(uploadPath + part.getSubmittedFileName());
                 }
                 boolean bsuccess;
-                bsuccess = pm.checkMusic(uploadPath + part.getSubmittedFileName());
+                bsuccess = mm.checkMusic(uploadPath + part.getSubmittedFileName());
                 if (bsuccess) {
                     PrintWriter out= response.getWriter();
-                    out.print("<script>alert('数据库已经存在该文件!');    window.location.href='ManageMusic.jsp'</script>");
+                    out.print("<script>alert('数据库已经存在该文件!');    window.location.href='ManageMusic.jsp?class=0'</script>");
                 } else {
-                    pm.uploadMusic(uploadPath + part.getSubmittedFileName());
+                    mm.uploadMusic( part.getSubmittedFileName(),uploadPath + part.getSubmittedFileName());
                     PrintWriter out= response.getWriter();
-                    out.print("<script>alert('歌曲上传成功!');    window.location.href='ManageMusic.jsp'</script>");
+                    out.print("<script>alert('歌曲上传成功!');    window.location.href='ManageMusic.jsp?class=0'</script>");
                 }
             }
 

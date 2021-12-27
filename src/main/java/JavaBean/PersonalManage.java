@@ -75,7 +75,7 @@ public class PersonalManage {
             p.setTitle(rs.getString("title"));
             p.setSinger(rs.getString("singer"));
             p.setUrl(rs.getString("url"));
-            p.setLyricurl(rs.getString("lyricurl"));
+            p.setLyric(rs.getString("lyric"));
             p.setClass1(rs.getBoolean("class1"));
             p.setClass2(rs.getBoolean("class2"));
             p.setClass3(rs.getBoolean("class3"));
@@ -86,13 +86,13 @@ public class PersonalManage {
         return musicList;
     }
 
-    public ArrayList<MyMusic> getMyMusicList() throws Exception {
+    public ArrayList<MyMusic> getMyMusicList(String owner) throws Exception {
         //查全部歌单
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
         Statement stmt = conn.createStatement();
         ArrayList<MyMusic> myMusicList = new ArrayList<MyMusic>();
-        ResultSet rs = stmt.executeQuery("select * from music");
+        ResultSet rs = stmt.executeQuery("select * from mymusic  where owner='" + owner + "' ");
         while (rs.next()) {
             MyMusic p = new MyMusic();
             p.setID(rs.getInt("ID"));
@@ -100,7 +100,7 @@ public class PersonalManage {
             p.setTitle(rs.getString("title"));
             p.setSinger(rs.getString("singer"));
             p.setUrl(rs.getString("url"));
-            p.setLyricurl(rs.getString("lyricurl"));
+            p.setLyric(rs.getString("lyric"));
             p.setClass1(rs.getBoolean("class1"));
             p.setClass2(rs.getBoolean("class2"));
             p.setClass3(rs.getBoolean("class3"));
@@ -125,7 +125,7 @@ public class PersonalManage {
             p.setTitle(rs.getString("title"));
             p.setSinger(rs.getString("singer"));
             p.setUrl(rs.getString("url"));
-            p.setLyricurl(rs.getString("lyricurl"));
+            p.setLyric(rs.getString("lyric"));
             p.setClass1(rs.getBoolean("class1"));
             p.setClass2(rs.getBoolean("class2"));
             p.setClass3(rs.getBoolean("class3"));
@@ -150,7 +150,7 @@ public class PersonalManage {
             p.setTitle(rs.getString("title"));
             p.setSinger(rs.getString("singer"));
             p.setUrl(rs.getString("url"));
-            p.setLyricurl(rs.getString("lyricurl"));
+            p.setLyric(rs.getString("lyric"));
             p.setClass1(rs.getBoolean("class1"));
             p.setClass2(rs.getBoolean("class2"));
             p.setClass3(rs.getBoolean("class3"));
@@ -167,12 +167,13 @@ public class PersonalManage {
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
         Statement stmt = conn.createStatement();
-        stmt.executeUpdate("INSERT INTO mymusic VALUES ('" + m.getID() + "','" + u.getUserName() + "','" + m.getTitle() + "', '" + m.getSinger() + "', '" + m.getUrl() + "', '" + m.getLyricurl() + "', '" + m.isClass1() + "', '" + m.isClass2() + "', " + "'" + m.isClass3() + "', '" + m.isClass4() + "')");
+        stmt.executeUpdate("INSERT INTO mymusic VALUES ('" + m.getID() + "','" + u.getUserName() + "','" + m.getTitle() + "', '" + m.getSinger() + "', '" + m.getUrl() + "', '" + m.getLyric() + "', '" + m.isClass1() + "', '" + m.isClass2() + "', " + "'" + m.isClass3() + "', '" + m.isClass4() + "')");
         conn.close();
     }
 
     public void uploadMusic(User u, String fileName) throws Exception {
         //用户上传音乐
+        //FIXME:数据库音乐路径应该为相对路径
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
         Statement stmt = conn.createStatement();

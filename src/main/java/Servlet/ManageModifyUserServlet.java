@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Servlet implementation class ManageModifyUserServlet
@@ -42,7 +43,7 @@ public class ManageModifyUserServlet extends HttpServlet {
             response.setContentType("text/html");
             String userName = request.getParameter("userName");
             String userPassword = request.getParameter("userPassword");
-            String oldname = request.getParameter("oldname");
+            String oldName = request.getParameter("oldName");
             User u = new User();
             u.setUserName(userName);
             u.setUserPassword(userPassword);
@@ -50,12 +51,12 @@ public class ManageModifyUserServlet extends HttpServlet {
             boolean bsuccess;
             bsuccess = a.checkUser(u);
             if (bsuccess) {
-                response.getWriter().print("用户名已存在，请重新输入");
-                response.setHeader("Refresh", "3;url=ManageModifyUser.jsp");
+                PrintWriter out= response.getWriter();
+                out.print("<script>alert('用户名已存在，请重新输入!');    window.location.href='ManageUser.jsp'</script>");
             } else {
-                a.modifyUser(u, oldname);
-                response.getWriter().print("The User has been modified successfully.");
-                response.setHeader("Refresh", "3;url=ManageUser.jsp");
+                a.modifyUser(u, oldName);
+                PrintWriter out= response.getWriter();
+                out.print("<script>alert('修改成功!');    window.location.href='ManageUser.jsp'</script>");
             }
 
         } catch (Exception e) {

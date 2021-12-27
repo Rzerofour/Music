@@ -5,7 +5,7 @@ public class Music {
     private String title;
     private String singer;
     private String url;
-    private String lyricurl;
+    private String lyric;
     private boolean class1;
     private boolean class2;
     private boolean class3;
@@ -16,8 +16,8 @@ public class Music {
         return ID;
     }
 
-    public void setID(int iD) {
-        ID = iD;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getTitle() {
@@ -44,12 +44,12 @@ public class Music {
         this.url = url;
     }
 
-    public String getLyricurl() {
-        return lyricurl;
+    public String getLyric() {
+        return lyric;
     }
 
-    public void setLyricurl(String lyricurl) {
-        this.lyricurl = lyricurl;
+    public void setLyric(String lyric) {
+        this.lyric = lyric;
     }
 
 

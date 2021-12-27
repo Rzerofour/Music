@@ -41,13 +41,13 @@ public class ManageModifyMusicServlet extends HttpServlet {
             m.setTitle(title);
             m.setSinger(singer);
             ManageMusic a = new ManageMusic();
-            if (a.modifycheck(m)) {
+            if (a.modifyCheck(m)) {
                 PrintWriter out= response.getWriter();
-                out.print("<script>alert('修改失败,修改值重复!');    window.location.href='ManageMusic.jsp'</script>");
+                out.print("<script>alert('修改失败,修改值重复!');    window.location.href='ManageMusic.jsp?class=0'</script>");
             } else {
                 a.modifyMusic(m);
                 PrintWriter out= response.getWriter();
-                out.print("<script>alert('修改成功!');    window.location.href='ManageMusic.jsp'</script>");
+                out.print("<script>alert('修改成功!');    window.location.href='ManageMusic.jsp?class=0'</script>");
             }
 
         } catch (Exception e) {

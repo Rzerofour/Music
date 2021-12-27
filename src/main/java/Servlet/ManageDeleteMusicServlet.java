@@ -37,7 +37,7 @@ public class ManageDeleteMusicServlet extends HttpServlet {
         try {
             a.deleteMusic(m);
             PrintWriter out= response.getWriter();
-            out.print("<script>alert('删除成功!');    window.location.href='ManageMusic.jsp'</script>");
+            out.print("<script>alert('删除成功!');    window.location.href='ManageMusic.jsp?class=0'</script>");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

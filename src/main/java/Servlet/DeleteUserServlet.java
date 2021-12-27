@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serial;
 import java.util.ArrayList;
 
@@ -48,17 +49,17 @@ public class DeleteUserServlet extends HttpServlet {
                     number++;
                 }
                 if (number == 1) {
-                    response.getWriter().print("管理员数量为1，不可继续删除");
-                    response.setHeader("Refresh", "3;url=ManageUser.jsp");
+                    PrintWriter out= response.getWriter();
+                    out.print("<script>alert('删除失败，请至少保留一位管理员!');    window.location.href='ManageUser.jsp'</script>");
                 } else {
                     a.deleteUser(u);
-                    response.getWriter().print("The User has been deleted.");
-                    response.setHeader("Refresh", "3;url=ManageUser.jsp");
+                    PrintWriter out= response.getWriter();
+                    out.print("<script>alert('删除成功!');    window.location.href='ManageUser.jsp'</script>");
                 }
             } else {
                 a.deleteUser(u);
-                response.getWriter().print("The User has been deleted.");
-                response.setHeader("Refresh", "3;url=ManageUser.jsp");
+                PrintWriter out= response.getWriter();
+                out.print("<script>alert('删除成功!');    window.location.href='ManageUser.jsp'</script>");
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+@SuppressWarnings("SqlNoDataSourceInspection")
 public class ManageUser {
 
     public static void main(String[] args) throws Exception {
@@ -74,6 +75,7 @@ public class ManageUser {
         Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
         Statement stmt = conn.createStatement();
         stmt.executeUpdate("UPDATE user SET username='" + u.getUserName() + "',userpassword='" + u.getUserPassword() + "'where  username='" + delName + "'");
+        stmt.executeUpdate("UPDATE mymusic SET owner='" + u.getUserName() + "'where  owner='" + delName + "' ");
         conn.close();
     }
 
@@ -83,7 +85,8 @@ public class ManageUser {
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
         Statement stmt = conn.createStatement();
-        stmt.executeUpdate("DELETE FROM user where username='" + user.getUserName() + "'");
+        stmt.executeUpdate("delete from user where username='" + user.getUserName() + "'");
+        stmt.executeUpdate("delete from mymusic where owner='" + user.getUserName() + "'");
         conn.close();
     }
 }

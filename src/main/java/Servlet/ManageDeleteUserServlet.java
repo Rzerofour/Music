@@ -16,14 +16,14 @@ import java.util.ArrayList;
 /**
  * Servlet implementation class DeleteUserServlet
  */
-public class DeleteUserServlet extends HttpServlet {
+public class ManageDeleteUserServlet extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
 
     /**
      * Default constructor.
      */
-    public DeleteUserServlet() {
+    public ManageDeleteUserServlet() {
         // TODO Auto-generated constructor stub
     }
 

@@ -99,7 +99,7 @@
 						</td>
 						<td>
 							<button type="button" class="btn btn-link"
-									onclick="window.location.href='DeleteUserServlet?oldName=<%=p.getUserName() %>'">删除
+									onclick="window.location.href='ManageDeleteUserServlet?oldName=<%=p.getUserName()%>'">删除
 							</button>
 						</td>
 					</tr>

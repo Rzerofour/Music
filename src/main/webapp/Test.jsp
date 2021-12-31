@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"
          import="JavaBean.*,java.util.*" pageEncoding="utf-8" %>
 <% request.setCharacterEncoding("UTF-8"); %>
+<%--TODO:个人中心,已完成注销、修改个人信息--%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -10,7 +11,7 @@
     <%-- 上述3个meta标签必须放在最前面，任何其他内容都必须跟随其后！ --%>
     <link rel="icon" href="image/icons8-musical-notes-24.png">
 
-    <title>音乐管理中心</title>
+    <title>个人中心</title>
 
     <%--jQuery--%>
     <script src="js/jquery-3.6.0.min.js"></script>
@@ -26,14 +27,15 @@
     <script>
         // 上传框
         $('#uploadModal').modal()
+        $('#modifyModal').modal()
         $(function () {
-            // 修改框
-            $('#modifyModal').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget);
-                var id = button.data('whatever');
-                var modal = $(this);
-                modal.find('.modal-body input[name=id]').val(id);
-            })
+        //     // 修改框
+        //     $('#modifyModal').on('show.bs.modal', function (event) {
+        //         var button = $(event.relatedTarget);
+        //         var id = button.data('whatever');
+        //         var modal = $(this);
+        //         modal.find('.modal-body input[name=id]').val(id);
+        //     })
             // 分类导航
             $(".class").click(function () {
                 $("#content").empty();
@@ -47,7 +49,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="ManageMusic.jsp?class=0"><i class="fa fa-home fa-fw"
-                                                                      aria-hidden="true"></i>个人管理中心</a>
+                                                                      aria-hidden="true"></i>个人中心</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -73,8 +75,14 @@
             <h1 class="page-header">编辑个人信息</h1>
 
             <div class="row placeholders">
-
-
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#modifyModal" >修改
+                </button>
+                <button type="button" class="btn btn-danger"
+                        onclick="window.location.href='PersonalDeleteSelfServlet?oldName=<%=request.getParameter("userName")%>'">删除
+                </button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modifyModal" >获取歌曲
+                </button>
             </div>
 
             <h2 class="sub-header">曲库列表</h2>
@@ -130,46 +138,12 @@
                         <jsp:setProperty name="Music" property="*"/>
                     </jsp:useBean>
                     <tbody id="content">
-                    <%
-                        String word = request.getParameter("partname");
-                        String classID = request.getParameter("class");
-                        //如果不搜索，根据class显示
-                        if (word == null) {
-                            switch (classID) {
-                                case "0": {%>
-                    <jsp:include page="classAll.jsp" flush="true"/>
-                    <%
-                            break;
-                        }
-                        case "1": {%>
-                    <jsp:include page="class1.jsp" flush="true"/>
-                    <%
-                            break;
-                        }
-                        case "2": {%>
-                    <jsp:include page="class2.jsp" flush="true"/>
-                    <%
-                            break;
-                        }
-                        case "3": {%>
-                    <jsp:include page="class3.jsp" flush="true"/>
-                    <%
-                            break;
-                        }
-                        case "4": {%>
-                    <jsp:include page="class4.jsp" flush="true"/>
-                    <%
-                                break;
-                            }
-                        }
-                    }
-                    //如果搜索，显示searchResult.jsp
-                    else {
-                    %>
-                    <jsp:include page="SearchResult.jsp?partname=<%=word%>" flush="true"/>
-                    <%
-                        }
-                    %>
+
+
+
+
+
+
                     </tbody>
                 </table>
             </div>
@@ -204,24 +178,57 @@
     </div>
 </div>
 
-<%--文件修改动态框--%>
+<%--&lt;%&ndash;文件修改动态框&ndash;%&gt;--%>
+<%--<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="modifyModalLabel">--%>
+<%--    <div class="modal-dialog" role="document">--%>
+<%--        <div class="modal-content">--%>
+<%--            <div class="modal-header">--%>
+<%--                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>--%>
+<%--                </button>--%>
+<%--                <h4 class="modal-title" id="modifyModalLabel">修改音乐信息</h4>--%>
+<%--            </div>--%>
+<%--            <form name='formModify' method='post' action='ManageModifyMusicServlet'>--%>
+<%--                <div class="modal-body">--%>
+<%--                    <div class="form-group">--%>
+<%--                        <label for="id">ID</label>--%>
+<%--                        <input id="id" name='id' type='text' class="form-control" value="" readonly>--%>
+<%--                        <label for="title">歌名</label>--%>
+<%--                        <input id="title" name='title' type='text' class="form-control" placeholder="歌名" required="">--%>
+<%--                        <label for="singer">歌手</label>--%>
+<%--                        <input id="singer" name='singer' type='text' class="form-control" placeholder="歌手" required="">--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="modal-footer">--%>
+<%--                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>--%>
+<%--                    <input type='submit' class="btn btn-primary" name='submit' value="提交">--%>
+<%--                </div>--%>
+<%--            </form>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
+
+<%--用户修改动态框--%>
 <div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="modifyModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="modifyModalLabel">修改音乐信息</h4>
+                <h4 class="modal-title" id="modifyModalLabel">修改个人信息</h4>
             </div>
-            <form name='formModify' method='post' action='ManageModifyMusicServlet'>
+            <form name='userModify' method='post' action='PersonalModifyServlet'>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="id">ID</label>
-                        <input id="id" name='id' type='text' class="form-control" value="" readonly>
-                        <label for="title">歌名</label>
-                        <input id="title" name='title' type='text' class="form-control" placeholder="歌名" required="">
-                        <label for="singer">歌手</label>
-                        <input id="singer" name='singer' type='text' class="form-control" placeholder="歌手" required="">
+                        <label for="oldName">旧的用户名</label>
+                        <input  id="oldName" name="oldName"  class="form-control"
+                                value="<%=request.getParameter("userName")%>" readonly>
+                        <label for="userName">新的用户名</label>
+                        <input id="userName" name='userName' type='text' class="form-control" placeholder="用户名"
+                               required="">
+                        <label for="userPassword">新的密码</label>
+                        <input id="userPassword" name='userPassword' type='text' class="form-control" placeholder="密码"
+                               required="">
+                        <br>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -236,4 +243,3 @@
 
 </body>
 </html>
-s

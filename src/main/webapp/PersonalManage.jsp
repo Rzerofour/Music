@@ -131,46 +131,12 @@
                         <jsp:setProperty name="Music" property="*"/>
                     </jsp:useBean>
                     <tbody id="content">
-                    <%
-                        String word = request.getParameter("partname");
-                        String classID = request.getParameter("class");
-                        //如果不搜索，根据class显示
-                        if (word == null) {
-                            switch (classID) {
-                                case "0": {%>
-                    <jsp:include page="classAll.jsp" flush="true"/>
-                    <%
-                            break;
-                        }
-                        case "1": {%>
-                    <jsp:include page="class1.jsp" flush="true"/>
-                    <%
-                            break;
-                        }
-                        case "2": {%>
-                    <jsp:include page="class2.jsp" flush="true"/>
-                    <%
-                            break;
-                        }
-                        case "3": {%>
-                    <jsp:include page="class3.jsp" flush="true"/>
-                    <%
-                            break;
-                        }
-                        case "4": {%>
-                    <jsp:include page="class4.jsp" flush="true"/>
-                    <%
-                                break;
-                            }
-                        }
-                    }
-                    //如果搜索，显示searchResult.jsp
-                    else {
-                    %>
-                    <jsp:include page="SearchResult.jsp?partname=<%=word%>" flush="true"/>
-                    <%
-                        }
-                    %>
+
+
+
+
+
+
                     </tbody>
                 </table>
             </div>

@@ -117,22 +117,22 @@
 					</div>
 					<div class="col-md-2">
 						<label for="class1" class="sr-only"></label>
-						<input name="class1" id="class1" class="class btn btn-lg btn-default btn-block" value="分类1"
+						<input name="class1" id="class1" class="class btn btn-lg btn-default btn-block" value="流行"
 							   onclick="window.location.href='ManageMusic.jsp?class=1'">
 					</div>
 					<div class="col-md-2">
 						<label for="class2" class="sr-only"></label>
-						<input name="class2" id="class2" class="class btn btn-lg btn-default btn-block" value="分类2"
+						<input name="class2" id="class2" class="class btn btn-lg btn-default btn-block" value="民谣"
 							   onclick="window.location.href='ManageMusic.jsp?class=2'">
 					</div>
 					<div class="col-md-2">
 						<label for="class3" class="sr-only"></label>
-						<input name="class3" id="class3" class="class btn btn-lg btn-default btn-block" value="分类3"
+						<input name="class3" id="class3" class="class btn btn-lg btn-default btn-block" value="嘻哈"
 							   onclick="window.location.href='ManageMusic.jsp?class=3'">
 					</div>
 					<div class="col-md-2">
 						<label for="class4" class="sr-only"></label>
-						<input name="class4" id="class4" class="btn btn-lg btn-default btn-block" value="分类4"
+						<input name="class4" id="class4" class="btn btn-lg btn-default btn-block" value="摇滚"
 							   onclick="window.location.href='ManageMusic.jsp?class=4'">
 					</div>
 				</div>
@@ -158,27 +158,222 @@
 						if (word == null) {
 							switch (classID) {
 								case "0": {%>
-					<jsp:include page="classAll.jsp" flush="true"/>
+					<%--classAll--%>
+					<%
+						ManageMusic a = new ManageMusic();
+						ArrayList<Music> pl = a.getMusicList();
+						for (Music p : pl) {
+					%>
+					<tr>
+						<td><%=p.getID() %>
+						</td>
+						<td><%=p.getTitle() %>
+						</td>
+						<td><%=p.getSinger() %>
+						<td>
+							<form name='playMusicForm' action='Play.jsp'>
+								<input hidden="hidden" type="text" name="musicTitle" value="<%=p.getTitle() %>"/>
+								<input hidden="hidden" type="text" name="musicSinger" value="<%=p.getSinger() %>"/>
+								<input hidden="hidden" type="text" name="musicUrl" value="<%=p.getUrl() %>"/>
+								<input hidden="hidden" type="text" name="musicLyric" value="<%=p.getLyric() %>"/>
+								<button type='submit' class="btn btn-success" name='submit' ><i class="fa fa-play-circle-o" aria-hidden="true"></i></button>
+							</form>
+						</td>
+						<td>
+							<button type="button" class="btn btn-link" data-toggle="modal"
+									data-target="#modifyModal" data-whatever="<%=p.getID() %>">修改
+							</button>
+						</td>
+						<td>
+							<button type="button" class="btn btn-link"
+									onclick="window.location.href='ManageDeleteMusicServlet?MusicID=<%=p.getID() %>'">删除
+							</button>
+						</td>
+					</tr>
+					<%
+						}
+					%>
+
 					<%
 							break;
 						}
 						case "1": {%>
-					<jsp:include page="class1.jsp" flush="true"/>
+					<%--class1--%>
+					<%
+						ManageMusic a = new ManageMusic();
+						ArrayList<Music> pl = a.getMusicList();
+						for (Music p : pl) {
+							if (p.isClass1()) {
+					%>
+					<tr>
+						<td><%=p.getID() %>
+						</td>
+						<td><%=p.getTitle() %>
+						</td>
+						<td><%=p.getSinger() %>
+						</td>
+						<td>
+							<form name='playMusicForm' action='Play.jsp'>
+								<input  type="hidden" name="musicTitle" value="<%=p.getTitle() %>"/>
+								<input  type="hidden" name="musicSinger" value="<%=p.getSinger() %>"/>
+								<input  type="hidden" name="musicUrl" value="<%=p.getUrl() %>"/>
+								<input  type="hidden" name="musicLyric" value="<%=p.getLyric() %>"/>
+								<button type='submit' class="btn btn-success" name='submit' ><i class="fa fa-play-circle-o" aria-hidden="true"></i></button>
+							</form>
+						</td>
+						<td>
+							<button type="button" class="btn btn-link" data-toggle="modal"
+									data-target="#modifyModal" data-whatever="<%=p.getID() %>">修改
+							</button>
+						</td>
+						<td>
+							<button type="button" class="btn btn-link"
+									onclick="window.location.href='ManageDeleteMusicServlet?MusicID=<%=p.getID() %>'">删除
+							</button>
+						</td>
+					</tr>
+
+					<%
+							}
+						}
+					%>
+
 					<%
 							break;
 						}
 						case "2": {%>
-					<jsp:include page="class2.jsp" flush="true"/>
+
+					<%
+
+						ManageMusic a = new ManageMusic();
+						ArrayList<Music> pl = a.getMusicList();
+						for (Music p : pl) {
+							if (p.isClass2()) {
+					%>
+					<%--class2--%>
+					<tr>
+						<td><%=p.getID() %>
+						</td>
+						<td><%=p.getTitle() %>
+						</td>
+						<td><%=p.getSinger() %>
+						</td>
+						<td>
+							<form name='playMusicForm' action='Play.jsp'>
+								<input hidden="hidden" type="text" name="musicTitle" value="<%=p.getTitle() %>"/>
+								<input hidden="hidden" type="text" name="musicSinger" value="<%=p.getSinger() %>"/>
+								<input hidden="hidden" type="text" name="musicUrl" value="<%=p.getUrl() %>"/>
+								<input hidden="hidden" type="text" name="musicLyric" value="<%=p.getLyric() %>"/>
+								<button type='submit' class="btn btn-success" name='submit' ><i class="fa fa-play-circle-o" aria-hidden="true"></i></button>
+							</form>
+						</td>
+						<td>
+							<button type="button" class="btn btn-link" data-toggle="modal"
+									data-target="#modifyModal" data-whatever="<%=p.getID() %>">修改
+							</button>
+						</td>
+						<td>
+							<button type="button" class="btn btn-link"
+									onclick="window.location.href='ManageDeleteMusicServlet?MusicID=<%=p.getID() %>'">删除
+							</button>
+						</td>
+					</tr>
+
+					<%
+							}
+						}
+					%>
+
 					<%
 							break;
 						}
 						case "3": {%>
-					<jsp:include page="class3.jsp" flush="true"/>
+					<%--class3--%>
+					<%
+
+						ManageMusic a = new ManageMusic();
+						ArrayList<Music> pl = a.getMusicList();
+						for (Music p : pl) {
+							if (p.isClass3()) {
+					%>
+					<tr>
+						<td><%=p.getID() %>
+						</td>
+						<td><%=p.getTitle() %>
+						</td>
+						<td><%=p.getSinger() %>
+						</td>
+						<td>
+							<form name='playMusicForm' action='Play.jsp'>
+								<input hidden="hidden" type="text" name="musicTitle" value="<%=p.getTitle() %>"/>
+								<input hidden="hidden" type="text" name="musicSinger" value="<%=p.getSinger() %>"/>
+								<input hidden="hidden" type="text" name="musicUrl" value="<%=p.getUrl() %>"/>
+								<input hidden="hidden" type="text" name="musicLyric" value="<%=p.getLyric() %>"/>
+								<button type='submit' class="btn btn-success" name='submit' ><i class="fa fa-play-circle-o" aria-hidden="true"></i></button>
+							</form>
+						</td>
+						<td>
+							<button type="button" class="btn btn-link" data-toggle="modal"
+									data-target="#modifyModal" data-whatever="<%=p.getID() %>">修改
+							</button>
+						</td>
+						<td>
+							<button type="button" class="btn btn-link"
+									onclick="window.location.href='ManageDeleteMusicServlet?MusicID=<%=p.getID() %>'">删除
+							</button>
+						</td>
+					</tr>
+
+					<%
+							}
+						}
+					%>
+
 					<%
 							break;
 						}
 						case "4": {%>
-					<jsp:include page="class4.jsp" flush="true"/>
+					<%--class4--%>
+					<%
+
+						ManageMusic a = new ManageMusic();
+						ArrayList<Music> pl = a.getMusicList();
+						for (Music p : pl) {
+							if (p.isClass4()) {
+					%>
+					<tr>
+						<td><%=p.getID() %>
+						</td>
+						<td><%=p.getTitle() %>
+						</td>
+						<td><%=p.getSinger() %>
+						</td>
+						<td>
+							<form name='playMusicForm' action='Play.jsp'>
+								<input hidden="hidden" type="text" name="musicTitle" value="<%=p.getTitle() %>"/>
+								<input hidden="hidden" type="text" name="musicSinger" value="<%=p.getSinger() %>"/>
+								<input hidden="hidden" type="text" name="musicUrl" value="<%=p.getUrl() %>"/>
+								<input hidden="hidden" type="text" name="musicLyric" value="<%=p.getLyric() %>"/>
+								<button type='submit' class="btn btn-success" name='submit' ><i class="fa fa-play-circle-o" aria-hidden="true"></i></button>
+							</form>
+						</td>
+						<td>
+							<button type="button" class="btn btn-link" data-toggle="modal"
+									data-target="#modifyModal" data-whatever="<%=p.getID() %>">修改
+							</button>
+						</td>
+						<td>
+							<button type="button" class="btn btn-link"
+									onclick="window.location.href='ManageDeleteMusicServlet?MusicID=<%=p.getID() %>'">删除
+							</button>
+						</td>
+					</tr>
+
+					<%
+							}
+						}
+					%>
+
 					<%
 								break;
 							}
@@ -187,7 +382,33 @@
 					//如果搜索，显示searchResult.jsp
 					else {
 					%>
-					<jsp:include page="SearchResult.jsp?partname=<%=word %>" flush="true"/>
+					<%--searchResult--%>
+					<%
+						ManageMusic a = new ManageMusic();
+						ArrayList<Music> pl = a.searchMusic(word);
+						for (Music p : pl) {
+					%>
+					<tr>
+						<td><%=p.getID() %>
+						</td>
+						<td><%=p.getTitle() %>
+						</td>
+						<td><%=p.getSinger() %>
+						</td>
+						<td>
+							<button type="button" class="btn btn-link" data-toggle="modal"
+									data-target="#modifyModal" data-whatever="<%=p.getID() %>">修改
+							</button>
+						</td>
+						<td>
+							<button type="button" class="btn btn-link"
+									onclick="window.location.href='ManageDeleteMusicServlet?MusicID=<%=p.getID() %>'">删除
+							</button>
+						</td>
+					</tr>
+
+					<%} %>
+
 					<%
 						}
 					%>
@@ -214,6 +435,21 @@
 						<input type="file" id="uploadFile" name="file" accept="audio/mpeg,audio/wav,audio/ogg"
 							   required="">
 						<p class="help-block">请上传MP3、Wav、Ogg格式文件！</p>
+					</div>
+					<div class="form-group">
+						所属类别：
+						<input type="checkbox" name="musicClass1" id="uploadMusicClass1" value="true" >
+						<label for="uploadMusicClass1">流行</label>
+						<input type="hidden" name="musicClass1" value="false" >
+						<input type="checkbox" name="musicClass2" id="uploadMusicClass2" value="true" >
+						<label for="uploadMusicClass2">民谣</label>
+						<input type="hidden" name="musicClass2" value="false" >
+						<input type="checkbox" name="musicClass3" id="uploadMusicClass3" value="true" >
+						<label for="uploadMusicClass3">嘻哈</label>
+						<input type="hidden" name="musicClass3" value="false" >
+						<input type="checkbox" name="musicClass4" id="uploadMusicClass4" value="true" >
+						<label for="uploadMusicClass4">摇滚</label>
+						<input type="hidden" name="musicClass4" value="false" >
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -243,6 +479,24 @@
 						<input id="title" name='title' type='text' class="form-control" placeholder="歌名" required="">
 						<label for="singer">歌手</label>
 						<input id="singer" name='singer' type='text' class="form-control" placeholder="歌手" required="">
+					</div>
+					<div class="form-group">
+						所属类别：
+						<div class="form-group">
+							所属类别：
+							<input type="checkbox" name="musicClass1" id="modifyMusicClass1" value="true" >
+							<label for="modifyMusicClass1">流行</label>
+							<input type="hidden" name="musicClass1" value="false" >
+							<input type="checkbox" name="musicClass2" id="modifyMusicClass2" value="true" >
+							<label for="modifyMusicClass2">民谣</label>
+							<input type="hidden" name="musicClass2" value="false" >
+							<input type="checkbox" name="musicClass3" id="modifyMusicClass3" value="true" >
+							<label for="modifyMusicClass3">嘻哈</label>
+							<input type="hidden" name="musicClass3" value="false" >
+							<input type="checkbox" name="musicClass4" id="modifyMusicClass4" value="true" >
+							<label for="modifyMusicClass4">摇滚</label>
+							<input type="hidden" name="musicClass4" value="false" >
+						</div>
 					</div>
 				</div>
 				<div class="modal-footer">

@@ -45,8 +45,7 @@ public class LoginServlet extends HttpServlet {
                 if (a.judgeUser(u)) {
                     response.sendRedirect("ManageMusic.jsp?class=0");
                 } else {
-                    request.setAttribute("user1",u.getUserName());
-                    request.getRequestDispatcher("/MusicManage").forward(request, response);
+                    response.sendRedirect("PersonalManage.jsp?userName="+userName);
                 }
             } else {
                 PrintWriter out= response.getWriter();

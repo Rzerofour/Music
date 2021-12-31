@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"
          import="JavaBean.*,java.util.*" pageEncoding="utf-8" %>
+<%@ page import="java.util.regex.Matcher" %>
+<%@ page import="java.util.regex.Pattern" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -63,7 +65,10 @@
                 out.print("<p>歌词未找到！</p>");
 
             } else {
-                out.print("<p>" + Music.getLyric() + "</p>");
+                String oldLyric= Music.getLyric();
+                oldLyric=oldLyric.replaceAll("\\[","<br>\\[");
+                String newLyric=oldLyric.replaceFirst("<br>","");
+                out.print("<p>" + newLyric + "</p>");
             } %>
 
         </div>

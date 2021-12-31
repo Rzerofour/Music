@@ -45,11 +45,12 @@ public class PersonalManage {
     }
 
     public void deleteUser(User u) throws Exception {
-        //注销账户
+        //注销账户与歌单
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
         Statement stmt = conn.createStatement();
         stmt.executeUpdate("delete from user where username='" + u.getUserName() + "'");
+        stmt.executeUpdate("delete from mymusic where owner='" + u.getUserName() + "'");
         conn.close();
     }
 
@@ -59,6 +60,7 @@ public class PersonalManage {
         Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
         Statement stmt = conn.createStatement();
         stmt.executeUpdate("UPDATE user SET username='" + u.getUserName() + "',userpassword='" + u.getUserPassword() + "'where  username='" + delName + "'");
+        stmt.executeUpdate("UPDATE mymusic SET owner='" + u.getUserName() + "'where  owner='" + delName + "' ");
         conn.close();
     }
 
@@ -171,18 +173,16 @@ public class PersonalManage {
         conn.close();
     }
 
-    public void uploadMusic(User u, String fileName) throws Exception {
-        //用户上传音乐
-        //FIXME:数据库音乐路径应该为相对路径
+    public void uploadMusic(Music m,String fileName,String filePath) throws Exception {
+        //上传至总曲库
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
         Statement stmt = conn.createStatement();
-
-        Mp3File mp3file = new Mp3File(fileName);
+        Mp3File mp3file = new Mp3File(filePath);
         if (mp3file.hasId3v2Tag()) {
             ID3v2 id3v2Tag = mp3file.getId3v2Tag();
-            stmt.executeUpdate("INSERT INTO music(singer,title,url,uploader) VALUES ('" + id3v2Tag.getArtist() + "', "
-                    + "'" + id3v2Tag.getTitle() + "', '" + fileName + "', '" + u.getUserName() + "')");
+            stmt.executeUpdate("INSERT INTO music(singer,title,url,lyric,class1,class2,class3,class4) VALUES ('" + id3v2Tag.getArtist() + "', " +
+                    "'" + id3v2Tag.getTitle() + "', '" + "music/" +fileName +"', '" + id3v2Tag.getLyrics() +"','"+m.isClass1()+"','"+m.isClass2()+"','"+m.isClass3()+"','"+m.isClass4()+"')");
         }
 
         conn.close();

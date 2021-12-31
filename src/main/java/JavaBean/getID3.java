@@ -4,6 +4,7 @@ import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.Mp3File;
 
 import java.io.File;
+import java.io.StringReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -20,12 +21,13 @@ public class getID3 {
             Mp3File mp3file = new Mp3File(f);
             if (mp3file.hasId3v2Tag()) {
                 ID3v2 id3v2Tag = mp3file.getId3v2Tag();
-                //System.out.println(id3v2Tag.getArtist());
-                //System.out.println(id3v2Tag.getTitle());
-                stmt.executeUpdate("INSERT INTO music(singer,title,url,uploader) VALUES ('" + id3v2Tag.getArtist() +
-                        "', " + "'" + id3v2Tag.getTitle() + "', '" + f + "', '" + "PRESET" + "')");
+                System.out.println(id3v2Tag.getArtist());
+                System.out.println(id3v2Tag.getTitle());
+                System.out.println(f.getName());
+
+                stmt.executeUpdate("INSERT INTO music(singer,title,url,lyric,uploader,class4) VALUES ('" + id3v2Tag.getArtist() + "', '" + id3v2Tag.getTitle() + "', '" + "music/" + f.getName() + "', '" + id3v2Tag.getLyrics() + "','" + "PRESET" + "','" + true + "')");
             }
+            }
+            conn.close();
         }
-        conn.close();
     }
-}

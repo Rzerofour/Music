@@ -29,7 +29,8 @@
 
         <div class="container">
             <div class="signin">
-                <form name="loginForm" class="form-inline" action="LoginServlet" method="get">
+                <form name="loginForm" class="form-inline" action="LoginServlet"
+                      method="get">
                     <h2 class="heading">登录</h2>
                     <label for="userName" class="sr-only">用户名</label>
                     <input type="text" name="userName" id="userName" class="form-control" placeholder="用户名" required=""

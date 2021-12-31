@@ -16,14 +16,14 @@ import java.io.Serial;
 /**
  * Servlet implementation class AddUserServlet
  */
-public class AddUserServlet extends HttpServlet {
+public class ManageAddUserServlet extends HttpServlet {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
     /**
      * Default constructor. 
      */
-    public AddUserServlet() {
+    public ManageAddUserServlet() {
         // TODO Auto-generated constructor stub
     }
 

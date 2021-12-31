@@ -47,7 +47,7 @@
         <description></description>
         <display-name>AddUserServlet</display-name>
         <servlet-name>AddUserServlet</servlet-name>
-        <servlet-class>Servlet.AddUserServlet</servlet-class>
+        <servlet-class>Servlet.ManageAddUserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddUserServlet</servlet-name>
@@ -73,16 +73,27 @@
         <servlet-name>ManageModifyUserServlet</servlet-name>
         <url-pattern>/ManageModifyUserServlet</url-pattern>
     </servlet-mapping>
+
+
     <servlet>
         <description></description>
-        <display-name>DeleteUserServlet</display-name>
-        <servlet-name>DeleteUserServlet</servlet-name>
-        <servlet-class>Servlet.DeleteUserServlet</servlet-class>
+        <display-name>PersonalDeleteSelfServlet</display-name>
+        <servlet-name>PersonalDeleteSelfServlet</servlet-name>
+        <servlet-class>Servlet.PersonalDeleteSelfServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>DeleteUserServlet</servlet-name>
-        <url-pattern>/DeleteUserServlet</url-pattern>
+        <servlet-name>PersonalDeleteSelfServlet</servlet-name>
+        <url-pattern>/PersonalDeleteSelfServlet</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+    <description></description>
+    <display-name>PersonalModifySelfServlet</display-name>
+    <servlet-name>PersonalModifySelfServlet</servlet-name>
+    <servlet-class>Servlet.PersonalModifySelfServlet</servlet-class>
+</servlet>
+    <servlet-mapping>
+        <servlet-name>PersonalModifySelfServlet</servlet-name>
+        <url-pattern>/PersonalModifySelfServlet</url-pattern>
+    </servlet-mapping>
 
 </web-app>

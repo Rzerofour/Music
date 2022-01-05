@@ -61,7 +61,7 @@
     <div class="row marketing">
         <div >
             <h3>歌词</h3>
-            <% if (Music.getLyric() == null) {
+            <% if (Music.getLyric()==null) {
                 out.print("<p>歌词未找到！</p>");
 
             } else {

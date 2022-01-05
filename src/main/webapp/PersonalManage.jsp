@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8"
          import="JavaBean.*,java.util.*" pageEncoding="utf-8" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<%--TODO:个人中心--%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>

@@ -25,7 +25,7 @@ public class getID3 {
                 System.out.println(id3v2Tag.getTitle());
                 System.out.println(f.getName());
 
-                stmt.executeUpdate("INSERT INTO music(singer,title,url,lyric,uploader,class4) VALUES ('" + id3v2Tag.getArtist() + "', '" + id3v2Tag.getTitle() + "', '" + "music/" + f.getName() + "', '" + id3v2Tag.getLyrics() + "','" + "PRESET" + "','" + true + "')");
+                stmt.executeUpdate("INSERT INTO music(singer,title,url,lyric,class4) VALUES ('" + id3v2Tag.getArtist() + "', '" + id3v2Tag.getTitle() + "', '" + "music/" + f.getName() + "', '" + id3v2Tag.getLyrics() + "','" + true + "')");
             }
             }
             conn.close();

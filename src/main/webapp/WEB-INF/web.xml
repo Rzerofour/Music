@@ -95,5 +95,44 @@
         <servlet-name>PersonalModifySelfServlet</servlet-name>
         <url-pattern>/PersonalModifySelfServlet</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+        <description></description>
+        <display-name>PersonalDeleteMyMusicServlet</display-name>
+        <servlet-name>PersonalDeleteMyMusicServlet</servlet-name>
+        <servlet-class>Servlet.PersonalDeleteMyMusicServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PersonalDeleteMyMusicServlet</servlet-name>
+        <url-pattern>/PersonalDeleteMyMusicServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <description></description>
+        <display-name>UpdateMusicLevelServlet</display-name>
+        <servlet-name>UpdateMusicLevelServlet</servlet-name>
+        <servlet-class>Servlet.UpdateMusicLevelServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateMusicLevelServlet</servlet-name>
+        <url-pattern>/UpdateMusicLevelServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <description></description>
+        <display-name>PersonalUploadMusicServlet</display-name>
+        <servlet-name>PersonalUploadMusicServlet</servlet-name>
+        <servlet-class>Servlet.PersonalUploadMusicServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PersonalUploadMusicServlet</servlet-name>
+        <url-pattern>/PersonalUploadMusicServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <description></description>
+        <display-name>AddMyMusicServlet</display-name>
+        <servlet-name>AddMyMusicServlet</servlet-name>
+        <servlet-class>Servlet.AddMyMusicServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddMyMusicServlet</servlet-name>
+        <url-pattern>/AddMyMusicServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

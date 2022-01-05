@@ -1,7 +1,10 @@
 package Servlet;
 
+
 import JavaBean.ManageMusic;
 import JavaBean.Music;
+import JavaBean.PersonalManage;
+import JavaBean.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
@@ -17,15 +20,8 @@ import java.util.Collection;
  * Servlet implementation class ManageUploadMusicServlet
  */
 @MultipartConfig
-public class ManageUploadMusicServlet extends HttpServlet {
+public class PersonalUploadMusicServlet extends HttpServlet {
 
-
-    /**
-     * Default constructor.
-     */
-    public ManageUploadMusicServlet() {
-        // TODO Auto-generated constructor stub
-    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -44,43 +40,56 @@ public class ManageUploadMusicServlet extends HttpServlet {
         // TODO Auto-generated method stub
         response.setCharacterEncoding("utf-8");
         response.setHeader("Content-Type", "text/html;charset=utf-8");
-
+        int up = Integer.parseInt(request.getParameter("up"));
+        String name = request.getParameter("name");
+        User user1 = new User();
+        user1.setUserName(name);
         boolean music1 = Boolean.parseBoolean(request.getParameter("musicClass1"));
         boolean music2 = Boolean.parseBoolean(request.getParameter("musicClass2"));
         boolean music3 = Boolean.parseBoolean(request.getParameter("musicClass3"));
         boolean music4 = Boolean.parseBoolean(request.getParameter("musicClass4"));
-        System.out.println(request.getParameter("musicClass1"));
+
         Music m = new Music();
         m.setClass1(music1);
         m.setClass2(music2);
         m.setClass3(music3);
         m.setClass4(music4);
-        ManageMusic mm = new ManageMusic();
+        PersonalManage pmusic = new PersonalManage();
+        ManageMusic pm = new ManageMusic();
         String uploadPath = "C:\\Program Files\\apache-tomcat-10.0.8\\webapps\\Music\\music\\";
+        String uploader;
+        if (up == 1) {
+            uploader = "";
+        } else {
+            uploader = name;
+        }
         try {
             final Collection<Part> parts = request.getParts();
             for (final Part part : parts) {
                 if (part.getSubmittedFileName() != null) {
                     part.write(uploadPath + part.getSubmittedFileName());
                     boolean bsuccess;
-                    bsuccess = mm.checkMusic(uploadPath + part.getSubmittedFileName());
+                    bsuccess = pm.checkMusic(uploadPath + part.getSubmittedFileName());
                     if (bsuccess) {
                         PrintWriter out = response.getWriter();
                         out.print("<script>alert('数据库已经存在该文件!');    window.location.href='ManageMusic" + ".jsp?class" +
                                 "=0'</script>");
                     } else {
-                        mm.uploadMusic(m, part.getSubmittedFileName(), uploadPath + part.getSubmittedFileName());
+                        pmusic.uploadMusic(part.getSubmittedFileName(),uploadPath + part.getSubmittedFileName(), m, uploader, user1);
+
+                        //pmusic.uploadMyMusic( part.getSubmittedFileName(), uploadPath + part.getSubmittedFileName(),m);
                         PrintWriter out = response.getWriter();
                         out.print("<script>alert('歌曲上传成功!');    window.location.href='ManageMusic" + ".jsp?class=0" +
                                 "'</script>");
                     }
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
+
+
 
 

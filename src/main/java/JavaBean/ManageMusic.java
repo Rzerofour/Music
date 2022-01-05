@@ -29,6 +29,7 @@ public class ManageMusic {
         p.setClass2(rs.getBoolean("class2"));
         p.setClass3(rs.getBoolean("class3"));
         p.setClass4(rs.getBoolean("class4"));
+        p.setUploader(rs.getString("uploader"));
         conn.close();
         return p;
     }
@@ -52,6 +53,7 @@ public class ManageMusic {
             p.setClass2(rs.getBoolean("class2"));
             p.setClass3(rs.getBoolean("class3"));
             p.setClass4(rs.getBoolean("class4"));
+            p.setUploader(rs.getString("uploader"));
             musicList.add(p);
         }
         conn.close();
@@ -76,6 +78,7 @@ public class ManageMusic {
             p.setClass2(rs.getBoolean("class2"));
             p.setClass3(rs.getBoolean("class3"));
             p.setClass4(rs.getBoolean("class4"));
+            p.setUploader(rs.getString("uploader"));
             musicList.add(p);
         }
         conn.close();

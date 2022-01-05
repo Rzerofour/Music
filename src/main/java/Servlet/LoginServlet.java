@@ -1,15 +1,19 @@
 package Servlet;
 
+import JavaBean.MyMusic;
+import JavaBean.PersonalManage;
 import JavaBean.Register;
 import JavaBean.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serial;
+import java.util.ArrayList;
 
 /**
  * Servlet implementation class LoginServlet
@@ -39,13 +43,21 @@ public class LoginServlet extends HttpServlet {
             u.setUserName(userName);
             u.setUserPassword(userPassword);
             Register a = new Register();
+            //PersonalManage music =new PersonalManage();
             boolean bsuccess;
             bsuccess = a.verifyUser(u);
             if (bsuccess) {
                 if (a.judgeUser(u)) {
                     response.sendRedirect("ManageMusic.jsp?class=0");
                 } else {
-                    response.sendRedirect("PersonalManage.jsp?userName="+userName);
+                    //HttpSession session = request.getSession();
+                    //session.setAttribute("data", userName);
+                    //String string=(String)request.getSession().getAttribute("data");
+                    //ArrayList<MyMusic> list= music.getMyMusicList( string);
+                    //request.setAttribute("list",list);
+                    //request.getRequestDispatcher("/Test.jsp?class=0").forward(request,response);
+                    response.sendRedirect("Test.jsp?class=0&user="+userName);
+
                 }
             } else {
                 PrintWriter out= response.getWriter();

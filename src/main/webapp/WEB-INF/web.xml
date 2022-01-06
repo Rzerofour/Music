@@ -15,6 +15,16 @@
     </servlet-mapping>
     <servlet>
         <description></description>
+        <display-name>ManageDeleteUserServlet</display-name>
+        <servlet-name>ManageDeleteUserServlet</servlet-name>
+        <servlet-class>Servlet.ManageDeleteUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ManageDeleteUserServlet</servlet-name>
+        <url-pattern>/ManageDeleteUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <description></description>
         <display-name>ManageUploadMusicServlet</display-name>
         <servlet-name>ManageUploadMusicServlet</servlet-name>
         <servlet-class>Servlet.ManageUploadMusicServlet</servlet-class>

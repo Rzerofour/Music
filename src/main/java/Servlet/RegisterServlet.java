@@ -51,15 +51,15 @@ public class RegisterServlet extends HttpServlet {
                     boolean bsuccess;
                     bsuccess = a.checkUser(u);
                     if (bsuccess) {
-                        PrintWriter out= response.getWriter();
+                        PrintWriter out = response.getWriter();
                         out.print("<script>alert('用户名已存在，请重新输入!');    window.location.href='Register.jsp'</script>");
                     } else {
                         b.addUser(u);
-                        PrintWriter out= response.getWriter();
+                        PrintWriter out = response.getWriter();
                         out.print("<script>alert('注册成功!');    window.location.href='Login.jsp'</script>");
                     }
                 } else {
-                    PrintWriter out= response.getWriter();
+                    PrintWriter out = response.getWriter();
                     out.print("<script>alert('密钥错误，请重新输入!');    window.location.href='Register.jsp'</script>");
                 }
             } else {
@@ -72,11 +72,11 @@ public class RegisterServlet extends HttpServlet {
                 boolean bsuccess;
                 bsuccess = a.checkUser(u);
                 if (bsuccess) {
-                    PrintWriter out= response.getWriter();
+                    PrintWriter out = response.getWriter();
                     out.print("<script>alert('用户名已存在，请重新输入!');    window.location.href='Register.jsp'</script>");
                 } else {
                     b.addUser(u);
-                    PrintWriter out= response.getWriter();
+                    PrintWriter out = response.getWriter();
                     out.print("<script>alert('注册成功!');    window.location.href='Login.jsp'</script>");
                 }
             }

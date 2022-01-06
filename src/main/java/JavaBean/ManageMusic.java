@@ -104,7 +104,7 @@ public class ManageMusic {
     }
 
     //添加歌曲
-    public void uploadMusic(Music m,String fileName,String filePath) throws Exception {
+    public void uploadMusic(Music m, String fileName, String filePath) throws Exception {
 
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
@@ -112,8 +112,7 @@ public class ManageMusic {
         Mp3File mp3file = new Mp3File(filePath);
         if (mp3file.hasId3v2Tag()) {
             ID3v2 id3v2Tag = mp3file.getId3v2Tag();
-            stmt.executeUpdate("INSERT INTO music(singer,title,url,lyric,class1,class2,class3,class4) VALUES ('" + id3v2Tag.getArtist() + "', " +
-                    "'" + id3v2Tag.getTitle() + "', '" + "music/" +fileName +"', '" + id3v2Tag.getLyrics() +"','"+m.isClass1()+"','"+m.isClass2()+"','"+m.isClass3()+"','"+m.isClass4()+"')");
+            stmt.executeUpdate("INSERT INTO music(singer,title,url,lyric,class1,class2,class3,class4) VALUES ('" + id3v2Tag.getArtist() + "', " + "'" + id3v2Tag.getTitle() + "', '" + "music/" + fileName + "', '" + id3v2Tag.getLyrics() + "','" + m.isClass1() + "','" + m.isClass2() + "','" + m.isClass3() + "','" + m.isClass4() + "')");
         }
 
         conn.close();

@@ -5,14 +5,15 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+@SuppressWarnings("SqlNoDataSourceInspection")
 public class Register {
     //用户注册
 
     public static void main(String[] args) throws Exception {
         Register re = new Register();
         User user = new User();
-        user.setUserName("wzna");
-        user.setUserPassword("555");
+        user.setUserName("test");
+        user.setUserPassword("test");
         user.setManager(true);
         re.addUser(user);
 

@@ -9,11 +9,13 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serial;
 
 /**
  * Servlet implementation class ManageModifyUserServlet
  */
 public class ManageModifyUserServlet extends HttpServlet {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -51,11 +53,11 @@ public class ManageModifyUserServlet extends HttpServlet {
             boolean bsuccess;
             bsuccess = a.checkUser(u);
             if (bsuccess) {
-                PrintWriter out= response.getWriter();
+                PrintWriter out = response.getWriter();
                 out.print("<script>alert('用户名已存在，请重新输入!');    window.location.href='ManageUser.jsp'</script>");
             } else {
                 a.modifyUser(u, oldName);
-                PrintWriter out= response.getWriter();
+                PrintWriter out = response.getWriter();
                 out.print("<script>alert('修改成功!');    window.location.href='ManageUser.jsp'</script>");
             }
 

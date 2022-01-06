@@ -50,11 +50,11 @@ public class ManageModifyMusicServlet extends HttpServlet {
             m.setClass4(music4);
             ManageMusic a = new ManageMusic();
             if (a.modifyCheck(m)) {
-                PrintWriter out= response.getWriter();
+                PrintWriter out = response.getWriter();
                 out.print("<script>alert('修改失败,修改值重复!');    window.location.href='ManageMusic.jsp?class=0'</script>");
             } else {
                 a.modifyMusic(m);
-                PrintWriter out= response.getWriter();
+                PrintWriter out = response.getWriter();
                 out.print("<script>alert('修改成功!');    window.location.href='ManageMusic.jsp?class=0'</script>");
             }
 

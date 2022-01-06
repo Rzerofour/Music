@@ -72,15 +72,14 @@ public class PersonalUploadMusicServlet extends HttpServlet {
                     bsuccess = pm.checkMusic(uploadPath + part.getSubmittedFileName());
                     if (bsuccess) {
                         PrintWriter out = response.getWriter();
-                        out.print("<script>alert('数据库已经存在该文件!');    window.location.href='ManageMusic" + ".jsp?class" +
-                                "=0'</script>");
+                        out.print("<script>alert('数据库已经存在该文件!');   window.location.href='PersonalManage" + ".jsp" +
+                                "?class=0&user=" + name + "'</script>");
                     } else {
-                        pmusic.uploadMusic(part.getSubmittedFileName(),uploadPath + part.getSubmittedFileName(), m, uploader, user1);
-
-                        //pmusic.uploadMyMusic( part.getSubmittedFileName(), uploadPath + part.getSubmittedFileName(),m);
+                        pmusic.uploadMusic(part.getSubmittedFileName(), uploadPath + part.getSubmittedFileName(), m,
+                                uploader, user1);
                         PrintWriter out = response.getWriter();
-                        out.print("<script>alert('歌曲上传成功!');    window.location.href='ManageMusic" + ".jsp?class=0" +
-                                "'</script>");
+                        out.print("<script>alert('歌曲上传成功!');    window.location.href='PersonalManage" + ".jsp?class=0"
+                                + "&user=" + name + "'</script>");
                     }
                 }
             }

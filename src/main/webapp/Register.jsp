@@ -82,7 +82,7 @@
                         </div>
                         <div class="col-md-4">
                             <input class="btn btn-lg btn-info btn-block" name="login" value="返回"
-                                   onclick="javascript:window.location.href='Login.jsp'">
+                                   onclick="window.location.href='Login.jsp'">
                         </div>
                     </div>
                 </form>

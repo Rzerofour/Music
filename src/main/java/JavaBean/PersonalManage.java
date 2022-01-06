@@ -61,6 +61,7 @@ public class PersonalManage {
         Statement stmt = conn.createStatement();
         stmt.executeUpdate("UPDATE user SET username='" + u.getUserName() + "',userpassword='" + u.getUserPassword() + "'where  username='" + delName + "'");
         stmt.executeUpdate("UPDATE mymusic SET owner='" + u.getUserName() + "'where  owner='" + delName + "' ");
+        stmt.executeUpdate("UPDATE music SET uploader='" + u.getUserName() + "'where  uploader='" + delName + "' ");
         conn.close();
     }
 
@@ -140,13 +141,15 @@ public class PersonalManage {
         return musicList;
     }
 
-    public ArrayList<MyMusic> searchMyMusic(String owner,String keyword) throws Exception {
+    public ArrayList<MyMusic> searchMyMusic(String owner, String keyword) throws Exception {
         //按照关键字查找歌单
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
         Statement stmt = conn.createStatement();
         ArrayList<MyMusic> myMusicList = new ArrayList<MyMusic>();
-        ResultSet rs = stmt.executeQuery("select * from mymusic where owner='"+ owner + "' and title like '%" + keyword + "%'");
+        ResultSet rs =
+                stmt.executeQuery("select * from mymusic where owner='" + owner + "' and title like '%" + keyword +
+                        "%'");
         while (rs.next()) {
             MyMusic p = new MyMusic();
             p.setID(rs.getInt("ID"));
@@ -166,41 +169,21 @@ public class PersonalManage {
         return myMusicList;
     }
 
-    public void uploadMyMusic(String fileName,String filePath,Music m,User u) throws Exception {
-
+    public void uploadMusic(String fileName, String filePath, Music m, String uploader, User u) throws Exception {
+        //上传歌曲
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
         Statement stmt = conn.createStatement();
         Mp3File mp3file = new Mp3File(filePath);
         if (mp3file.hasId3v2Tag()) {
             ID3v2 id3v2Tag = mp3file.getId3v2Tag();
-            stmt.executeUpdate("INSERT INTO mymusic(owner,title,singer,url,class1,class2,class3,class4) VALUES ('"+u.getUserName()+"','" +id3v2Tag.getArtist() +
-                    "', " +
-                    "'" + id3v2Tag.getTitle() + "', '" + "music/"+fileName + "','"+m.isClass1()+"','"+m.isClass2()+"','"+m.isClass3()+"','"+m.isClass4()+"')");
-        }
-
-        conn.close();
-    }
-
-    public void uploadMusic(String fileName,String filePath,Music m,String uploader,User u) throws Exception {
-
-        Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-        Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
-        Statement stmt = conn.createStatement();
-        Mp3File mp3file = new Mp3File(filePath);
-        if (mp3file.hasId3v2Tag()) {
-            ID3v2 id3v2Tag = mp3file.getId3v2Tag();
-            stmt.executeUpdate("INSERT INTO music(singer,title,url,class1,class2,class3,class4,uploader) VALUES ('" + id3v2Tag.getArtist() +
-                    "', " +
-                    "'" + id3v2Tag.getTitle() + "', '" + "music/"+fileName + "','"+m.isClass1()+"','"+m.isClass2()+"','"+m.isClass3()+"','"+m.isClass4()+"','"+uploader+"')");
-            ResultSet rs =
-                    stmt.executeQuery("select * from music where title='"+ id3v2Tag.getTitle() + "' and singer='"+id3v2Tag.getArtist()+
-                            "'");
+            stmt.executeUpdate("INSERT INTO music(singer,title,url,class1,class2,class3,class4,uploader) VALUES ('" + id3v2Tag.getArtist() + "', " + "'" + id3v2Tag.getTitle() + "', '" + "music/" + fileName + "','" + m.isClass1() + "','" + m.isClass2() + "','" + m.isClass3() + "','" + m.isClass4() + "','" + uploader + "')");
+            ResultSet rs = stmt.executeQuery("select * from music where title='" + id3v2Tag.getTitle() + "' and " +
+                    "singer='" + id3v2Tag.getArtist() + "'");
             while (rs.next()) {
-            stmt.executeUpdate(
-                    "INSERT INTO mymusic(ID,owner,title,singer,url,class1,class2,class3,class4) VALUES ('"+rs.getInt("ID")+"','"+u.getUserName()+"','" +id3v2Tag.getArtist() +
-                    "', " +
-                    "'" + id3v2Tag.getTitle() + "', '" + "music/"+fileName + "','"+m.isClass1()+"','"+m.isClass2()+"','"+m.isClass3()+"','"+m.isClass4()+"')"); }
+                stmt.executeUpdate("INSERT INTO mymusic(ID,owner,title,singer,url,class1,class2,class3,class4) " +
+                        "VALUES" + " ('" + rs.getInt("ID") + "','" + u.getUserName() + "','" + id3v2Tag.getArtist() + "', " + "'" + id3v2Tag.getTitle() + "', '" + "music/" + fileName + "','" + m.isClass1() + "'," + "'" + m.isClass2() + "','" + m.isClass3() + "','" + m.isClass4() + "')");
+            }
         }
 
         conn.close();
@@ -215,33 +198,33 @@ public class PersonalManage {
         conn.close();
     }
 
-    public void modifyMyMusic(User u,String level,MyMusic m) throws Exception {
+    public void modifyMyMusic(User u, String level, MyMusic m) throws Exception {
         //修改歌曲评分
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
         Statement stmt = conn.createStatement();
-        stmt.executeUpdate("UPDATE mymusic SET level='"+ level +  "' where  owner='"+u.getUserName()+"'and ID='"+m.getID()+"'");
+        stmt.executeUpdate("UPDATE mymusic SET level='" + level + "' where  owner='" + u.getUserName() + "'and ID='" + m.getID() + "'");
         conn.close();
     }
-    public boolean checkMyMusic(User u,MyMusic music)throws Exception
 
-    {
+    public boolean checkMyMusic(User u, MyMusic music) throws Exception {
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("select * from mymusic where ID='"+music.getID()+ "'and owner='" + u.getUserName() + "'");
+        ResultSet rs =
+                stmt.executeQuery("select * from mymusic where ID='" + music.getID() + "'and owner='" + u.getUserName() + "'");
         boolean bSuccess;
         bSuccess = rs.next();
         conn.close();
         return bSuccess;
     }
-    public void addMyMusic(Music m,User u) throws Exception {
+
+    public void addMyMusic(Music m, User u) throws Exception {
         //曲库存入歌单
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         Connection conn = DriverManager.getConnection("jdbc:ucanaccess://E:\\DataBase.accdb");
         Statement stmt = conn.createStatement();
-        stmt.executeUpdate("INSERT INTO mymusic(ID,owner,title,singer,url,lyric,class1,class2,class3,class4) VALUES ('" + m.getID() + "','" + u.getUserName() + "','" + m.getTitle() + "', '" + m.getSinger() +
-                "', '" + m.getUrl() + "', '" + m.getLyric() + "', '" + m.isClass1() + "', '" + m.isClass2() + "', '" + m.isClass3() + "', '" + m.isClass4() + "')");
+        stmt.executeUpdate("INSERT INTO mymusic(ID,owner,title,singer,url,lyric,class1,class2,class3,class4) VALUES " + "('" + m.getID() + "','" + u.getUserName() + "','" + m.getTitle() + "', '" + m.getSinger() + "', '" + m.getUrl() + "', '" + m.getLyric() + "', '" + m.isClass1() + "', '" + m.isClass2() + "', '" + m.isClass3() + "', '" + m.isClass4() + "')");
         conn.close();
     }
 }

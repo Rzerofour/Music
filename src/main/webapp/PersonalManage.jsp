@@ -1,3 +1,4 @@
+<%--suppress HtmlFormInputWithoutLabel --%>
 <%@ page contentType="text/html; charset=utf-8"
          import="JavaBean.*,java.util.*" pageEncoding="utf-8" %>
 <% request.setCharacterEncoding("UTF-8"); %>
@@ -10,7 +11,7 @@
     <%-- 上述3个meta标签必须放在最前面，任何其他内容都必须跟随其后！ --%>
     <link rel="icon" href="image/icons8-musical-notes-24.png">
 
-    <title>音乐管理中心</title>
+    <title>个人中心</title>
 
     <%--jQuery--%>
     <script src="js/jquery-3.6.0.min.js"></script>
@@ -26,9 +27,10 @@
     <script>
         // 上传框
         $('#uploadModal').modal()
+        $('#modifyModal').modal()
         $(function () {
             // 修改框
-            $('#modifyModal').on('show.bs.modal', function (event) {
+            $('#modifyMusicModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget);
                 var id = button.data('whatever');
                 var modal = $(this);
@@ -42,18 +44,21 @@
     </script>
 </head>
 <body>
+<%
+    String user = request.getParameter("user");
+%>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="ManageMusic.jsp?class=0"><i class="fa fa-home fa-fw"
-                                                                      aria-hidden="true"></i>个人管理中心</a>
+                                                                      aria-hidden="true"></i>个人中心</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="Login.jsp">退出中心</a></li>
             </ul>
-            <form class="navbar-form navbar-right" action="ManageMusic.jsp?class=0" method="post">
+            <form class="navbar-form navbar-right" action="PersonalManage.jsp?class=0&user=<%=user%>" method="post">
                 <div class="input-group">
                     <label for="partname" class="sr-only"></label>
                     <input type="text" class="form-control" id="partname" name="partname" placeholder="按歌名搜索...">
@@ -71,12 +76,30 @@
 
         <div class="col-sm-12  col-md-12  main">
             <h1 class="page-header">编辑个人信息</h1>
-
             <div class="row placeholders">
-
-
+                <div class=" col-md-3 placeholder">
+                    <img src="image/icons8-user-64.png"
+                         width="200" height="200" class="img-responsive img-circle" alt="用户头像">
+                    <h4>欢迎，<%=user%>!</h4>
+                </div>
+                <div class="col-md-9">
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-lg btn-primary btn-block" data-toggle="modal"
+                                data-target="#modifyModal">修改
+                        </button>
+                    </div>
+                    <div class="col-md-3 ">
+                        <button type="button" class="btn btn-lg btn-danger btn-block"
+                                onclick="window.location.href='PersonalDeleteSelfServlet?oldName=<%=user%>'">删除
+                        </button>
+                    </div>
+                    <div class="col-md-3 ">
+                        <button type="button" class="btn btn-lg btn-success btn-block"
+                                onclick="window.location.href='GetMusic.jsp?class=0&user=<%=user%>'">探索
+                        </button>
+                    </div>
+                </div>
             </div>
-
             <h2 class="sub-header">曲库列表</h2>
 
 
@@ -92,27 +115,27 @@
                         <label for="classAll" class="sr-only"></label>
                         <input name="classAll" id="classAll" class=" class btn btn-lg btn-default btn-block"
                                value="全部歌曲"
-                               onclick="window.location.href='ManageMusic.jsp?class=0'">
+                               onclick="window.location.href='PersonalManage.jsp?class=0&user=<%=user%>'">
                     </div>
                     <div class="col-md-2">
                         <label for="class1" class="sr-only"></label>
-                        <input name="class1" id="class1" class="class btn btn-lg btn-default btn-block" value="分类1"
-                               onclick="window.location.href='ManageMusic.jsp?class=1'">
+                        <input name="class1" id="class1" class="class btn btn-lg btn-default btn-block" value="流行"
+                               onclick="window.location.href='PersonalManage.jsp?class=1&user=<%=user%>'">
                     </div>
                     <div class="col-md-2">
                         <label for="class2" class="sr-only"></label>
-                        <input name="class2" id="class2" class="class btn btn-lg btn-default btn-block" value="分类2"
-                               onclick="window.location.href='ManageMusic.jsp?class=2'">
+                        <input name="class2" id="class2" class="class btn btn-lg btn-default btn-block" value="民谣"
+                               onclick="window.location.href='PersonalManage.jsp?class=2&user=<%=user%>'">
                     </div>
                     <div class="col-md-2">
                         <label for="class3" class="sr-only"></label>
-                        <input name="class3" id="class3" class="class btn btn-lg btn-default btn-block" value="分类3"
-                               onclick="window.location.href='ManageMusic.jsp?class=3'">
+                        <input name="class3" id="class3" class="class btn btn-lg btn-default btn-block" value="嘻哈"
+                               onclick="window.location.href='PersonalManage.jsp?class=3&user=<%=user%>'">
                     </div>
                     <div class="col-md-2">
                         <label for="class4" class="sr-only"></label>
-                        <input name="class4" id="class4" class="btn btn-lg btn-default btn-block" value="分类4"
-                               onclick="window.location.href='ManageMusic.jsp?class=4'">
+                        <input name="class4" id="class4" class="btn btn-lg btn-default btn-block" value="摇滚"
+                               onclick="window.location.href='PersonalManage.jsp?class=4&user=<%=user%>'">
                     </div>
                 </div>
 
@@ -122,6 +145,7 @@
                         <th>#</th>
                         <th>歌名</th>
                         <th>歌手</th>
+                        <th>评分</th>
                         <th>播放</th>
                         <th colspan="2">操作</th>
                     </tr>
@@ -130,12 +154,299 @@
                         <jsp:setProperty name="Music" property="*"/>
                     </jsp:useBean>
                     <tbody id="content">
+                    <%
+                        String word = request.getParameter("partname");
+                        String classID = request.getParameter("class");
+                        //如果不搜索，根据class显示
+                        if (word == null) {
+                            switch (classID) {
+                                case "0": {%>
+                    <%--classAll--%>
+                    <%
+                        PersonalManage a = new PersonalManage();
+                        ArrayList<MyMusic> pl = a.getMyMusicList(user);
+                        for (MyMusic p : pl) {
+                    %>
+                    <tr>
+                        <td><%=p.getID() %>
+                        </td>
+                        <td><%=p.getTitle() %>
+                        </td>
+                        <td><%=p.getSinger() %>
+                        </td>
+                        <td><%=p.getLevel() %>
+                        </td>
+                        <td>
+                            <form name='playMusicForm' action='Play.jsp'>
+                                <input hidden="hidden" type="text" name="musicTitle" value="<%=p.getTitle() %>"/>
+                                <input hidden="hidden" type="text" name="musicSinger" value="<%=p.getSinger() %>"/>
+                                <input hidden="hidden" type="text" name="musicUrl" value="<%=p.getUrl() %>"/>
+                                <input hidden="hidden" type="text" name="musicLyric" value="<%=p.getLyric() %>"/>
+                                <button type='submit' class="btn btn-success" name='submit'><i
+                                        class="fa fa-play-circle-o" aria-hidden="true"></i></button>
+                            </form>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-link"
+                                    onclick="window.location.href='PersonalDeleteMyMusicServlet?id=<%=p.getID() %>&owner=<%=p.getOwner()%>'">
+                                删除
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-link" data-toggle="modal"
+                                    data-target="#modifyMusicModal" data-whatever="<%=p.getID() %>">评分
+                            </button>
+                        </td>
+                    </tr>
+                    <%
+                        }
+                    %>
 
+                    <%
+                            break;
+                        }
+                        case "1": {%>
+                    <%--class1--%>
+                    <%
+                        PersonalManage a = new PersonalManage();
+                        ArrayList<MyMusic> pl = a.getMyMusicList(user);
+                        for (MyMusic p : pl) {
+                            if (p.isClass1()) {
+                    %>
+                    <tr>
+                        <td><%=p.getID() %>
+                        </td>
+                        <td><%=p.getTitle() %>
+                        </td>
+                        <td><%=p.getSinger() %>
+                        </td>
+                        <td><%=p.getLevel() %>
+                        </td>
+                        <td>
+                            <form name='playMusicForm' action='Play.jsp'>
+                                <input hidden="hidden" type="text" name="musicTitle" value="<%=p.getTitle() %>"/>
+                                <input hidden="hidden" type="text" name="musicSinger" value="<%=p.getSinger() %>"/>
+                                <input hidden="hidden" type="text" name="musicUrl" value="<%=p.getUrl() %>"/>
+                                <input hidden="hidden" type="text" name="musicLyric" value="<%=p.getLyric() %>"/>
+                                <button type='submit' class="btn btn-success" name='submit'><i
+                                        class="fa fa-play-circle-o" aria-hidden="true"></i></button>
+                            </form>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-link"
+                                    onclick="window.location.href='PersonalDeleteMyMusicServlet?id=<%=p.getID() %>&owner=<%=p.getOwner()%>'">
+                                删除
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-link" data-toggle="modal"
+                                    data-target="#modifyMusicModal" data-whatever="<%=p.getID() %>">评分
+                            </button>
+                        </td>
+                    </tr>
 
+                    <%
+                            }
+                        }
+                    %>
 
+                    <%
+                            break;
+                        }
+                        case "2": {%>
 
+                    <%
 
+                        PersonalManage a = new PersonalManage();
+                        ArrayList<MyMusic> pl = a.getMyMusicList(user);
+                        for (MyMusic p : pl) {
+                            if (p.isClass2()) {
+                    %>
+                    <%--class2--%>
+                    <tr>
+                        <td><%=p.getID() %>
+                        </td>
+                        <td><%=p.getTitle() %>
+                        </td>
+                        <td><%=p.getSinger() %>
+                        </td>
+                        <td><%=p.getLevel() %>
+                        </td>
+                        <td>
+                            <form name='playMusicForm' action='Play.jsp'>
+                                <input hidden="hidden" type="text" name="musicTitle" value="<%=p.getTitle() %>"/>
+                                <input hidden="hidden" type="text" name="musicSinger" value="<%=p.getSinger() %>"/>
+                                <input hidden="hidden" type="text" name="musicUrl" value="<%=p.getUrl() %>"/>
+                                <input hidden="hidden" type="text" name="musicLyric" value="<%=p.getLyric() %>"/>
+                                <button type='submit' class="btn btn-success" name='submit'><i
+                                        class="fa fa-play-circle-o" aria-hidden="true"></i></button>
+                            </form>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-link"
+                                    onclick="window.location.href='PersonalDeleteMyMusicServlet?id=<%=p.getID() %>&owner=<%=p.getOwner()%>'">
+                                删除
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-link" data-toggle="modal"
+                                    data-target="#modifyMusicModal" data-whatever="<%=p.getID() %>">评分
+                            </button>
+                        </td>
+                    </tr>
 
+                    <%
+                            }
+                        }
+                    %>
+
+                    <%
+                            break;
+                        }
+                        case "3": {%>
+                    <%--class3--%>
+                    <%
+                        PersonalManage a = new PersonalManage();
+                        ArrayList<MyMusic> pl = a.getMyMusicList(user);
+                        for (MyMusic p : pl) {
+                            if (p.isClass3()) {
+                    %>
+                    <tr>
+                        <td><%=p.getID() %>
+                        </td>
+                        <td><%=p.getTitle() %>
+                        </td>
+                        <td><%=p.getSinger() %>
+                        </td>
+                        <td><%=p.getLevel() %>
+                        </td>
+                        <td>
+                            <form name='playMusicForm' action='Play.jsp'>
+                                <input hidden="hidden" type="text" name="musicTitle" value="<%=p.getTitle() %>"/>
+                                <input hidden="hidden" type="text" name="musicSinger" value="<%=p.getSinger() %>"/>
+                                <input hidden="hidden" type="text" name="musicUrl" value="<%=p.getUrl() %>"/>
+                                <input hidden="hidden" type="text" name="musicLyric" value="<%=p.getLyric() %>"/>
+                                <button type='submit' class="btn btn-success" name='submit'><i
+                                        class="fa fa-play-circle-o" aria-hidden="true"></i></button>
+                            </form>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-link"
+                                    onclick="window.location.href='PersonalDeleteMyMusicServlet?id=<%=p.getID() %>&owner=<%=p.getOwner()%>'">
+                                删除
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-link" data-toggle="modal"
+                                    data-target="#modifyMusicModal" data-whatever="<%=p.getID() %>">评分
+                            </button>
+                        </td>
+                    </tr>
+
+                    <%
+                            }
+                        }
+                    %>
+
+                    <%
+                            break;
+                        }
+                        case "4": {%>
+                    <%--class4--%>
+                    <%
+                        PersonalManage a = new PersonalManage();
+                        ArrayList<MyMusic> pl = a.getMyMusicList(user);
+                        for (MyMusic p : pl) {
+                            if (p.isClass4()) {
+                    %>
+                    <tr>
+                        <td><%=p.getID() %>
+                        </td>
+                        <td><%=p.getTitle() %>
+                        </td>
+                        <td><%=p.getSinger() %>
+                        </td>
+                        <td><%=p.getLevel() %>
+                        </td>
+                        <td>
+                            <form name='playMusicForm' action='Play.jsp'>
+                                <input hidden="hidden" type="text" name="musicTitle" value="<%=p.getTitle() %>"/>
+                                <input hidden="hidden" type="text" name="musicSinger" value="<%=p.getSinger() %>"/>
+                                <input hidden="hidden" type="text" name="musicUrl" value="<%=p.getUrl() %>"/>
+                                <input hidden="hidden" type="text" name="musicLyric" value="<%=p.getLyric() %>"/>
+                                <button type='submit' class="btn btn-success" name='submit'><i
+                                        class="fa fa-play-circle-o" aria-hidden="true"></i></button>
+                            </form>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-link"
+                                    onclick="window.location.href='PersonalDeleteMyMusicServlet?id=<%=p.getID() %>&owner=<%=p.getOwner()%>'">
+                                删除
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-link" data-toggle="modal"
+                                    data-target="#modifyMusicModal" data-whatever="<%=p.getID() %>">评分
+                            </button>
+                        </td>
+                    </tr>
+
+                    <%
+                            }
+                        }
+                    %>
+
+                    <%
+                                break;
+                            }
+                        }
+                    }
+                    //如果搜索，显示searchResult.jsp
+                    else {
+                    %>
+                    <%--searchResult--%>
+                    <%
+                        PersonalManage a = new PersonalManage();
+                        ArrayList<MyMusic> pl = a.searchMyMusic(user, word);
+                        for (MyMusic p : pl) {
+                    %>
+                    <tr>
+                        <td><%=p.getID() %>
+                        </td>
+                        <td><%=p.getTitle() %>
+                        </td>
+                        <td><%=p.getSinger() %>
+                        </td>
+                        <td><%=p.getLevel() %>
+                        </td>
+                        <td>
+                            <form name='playMusicForm' action='Play.jsp'>
+                                <input hidden="hidden" type="text" name="musicTitle" value="<%=p.getTitle() %>"/>
+                                <input hidden="hidden" type="text" name="musicSinger" value="<%=p.getSinger() %>"/>
+                                <input hidden="hidden" type="text" name="musicUrl" value="<%=p.getUrl() %>"/>
+                                <input hidden="hidden" type="text" name="musicLyric" value="<%=p.getLyric() %>"/>
+                                <button type='submit' class="btn btn-success" name='submit'><i
+                                        class="fa fa-play-circle-o" aria-hidden="true"></i></button>
+                            </form>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-link"
+                                    onclick="window.location.href='PersonalDeleteMyMusicServlet?id=<%=p.getID() %>&owner=<%=p.getOwner()%>'">
+                                评分
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-link" data-toggle="modal"
+                                    data-target="#modifyMusicModal" data-whatever="<%=p.getID() %>">评分
+                            </button>
+                        </td>
+                    </tr>
+
+                    <%} %>
+
+                    <%
+                        }
+                    %>
                     </tbody>
                 </table>
             </div>
@@ -148,17 +459,41 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title" id="uploadModalLabel">上传你的音乐至曲库！</h4>
             </div>
-            <form action="ManageUploadMusicServlet" method="post" enctype="multipart/form-data">
+            <form action="PersonalUploadMusicServlet" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="uploadFile">上传音乐</label>
                         <input type="file" id="uploadFile" name="file" accept="audio/mpeg,audio/wav,audio/ogg"
                                required="">
                         <p class="help-block">请上传MP3、Wav、Ogg格式文件！</p>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            所属类别：
+                            <input type="checkbox" name="musicClass1" id="modifyMusicClass1" value="true">
+                            <label for="modifyMusicClass1">流行</label>
+                            <input type="hidden" name="musicClass1" value="false">
+                            <input type="checkbox" name="musicClass2" id="modifyMusicClass2" value="true">
+                            <label for="modifyMusicClass2">民谣</label>
+                            <input type="hidden" name="musicClass2" value="false">
+                            <input type="checkbox" name="musicClass3" id="modifyMusicClass3" value="true">
+                            <label for="modifyMusicClass3">嘻哈</label>
+                            <input type="hidden" name="musicClass3" value="false">
+                            <input type="checkbox" name="musicClass4" id="modifyMusicClass4" value="true">
+                            <label for="modifyMusicClass4">摇滚</label>
+                            <input type="hidden" name="musicClass4" value="false">
+                        </div>
+                        <div class="form-group">
+                            是否公开：
+                            <input type="radio" name="up" value="1">是
+                            <input type="radio" name="up" value="0">否<br>
+                            <input hidden="hidden" type="text" name="name" value="<%=user %>"/>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -171,23 +506,23 @@
 </div>
 
 <%--文件修改动态框--%>
-<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="modifyModalLabel">
+<div class="modal fade" id="modifyMusicModal" tabindex="-1" role="dialog" aria-labelledby="modifyMusicModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="modifyModalLabel">修改音乐信息</h4>
+                <h4 class="modal-title" id="modifyMusicModalLabel">评分</h4>
             </div>
-            <form name='formModify' method='post' action='ManageModifyMusicServlet'>
+            <form name='formModify' method='post' action='UpdateMusicLevelServlet'>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="id">ID</label>
                         <input id="id" name='id' type='text' class="form-control" value="" readonly>
-                        <label for="title">歌名</label>
-                        <input id="title" name='title' type='text' class="form-control" placeholder="歌名" required="">
-                        <label for="singer">歌手</label>
-                        <input id="singer" name='singer' type='text' class="form-control" placeholder="歌手" required="">
+                        <input hidden="hidden" type="text" name="name" value="<%=user %>"/>
+                        <label for="level">评分</label>
+                        <input type="number" min="0" max="10" class="form-control" name="level" id="level">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -199,6 +534,39 @@
     </div>
 </div>
 
-
+<%--用户修改动态框--%>
+<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="modifyModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="modifyModalLabel">修改个人信息</h4>
+            </div>
+            <form name='userModify' method='post' action='PersonalModifySelfServlet'>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="oldName">旧的用户名</label>
+                        <input id="oldName" name="oldName" class="form-control"
+                               value="<%=user%>" readonly>
+                        <label for="userName">新的用户名</label>
+                        <input id="userName" name='userName' type='text' class="form-control" placeholder="用户名"
+                               required="">
+                        <label for="userPassword">新的密码</label>
+                        <input id="userPassword" name='userPassword' type='text' class="form-control"
+                               placeholder="密码"
+                               required="">
+                        <br>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <input type='submit' class="btn btn-primary" name='submit' value="提交">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

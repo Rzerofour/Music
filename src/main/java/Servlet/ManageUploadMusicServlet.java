@@ -49,7 +49,6 @@ public class ManageUploadMusicServlet extends HttpServlet {
         boolean music2 = Boolean.parseBoolean(request.getParameter("musicClass2"));
         boolean music3 = Boolean.parseBoolean(request.getParameter("musicClass3"));
         boolean music4 = Boolean.parseBoolean(request.getParameter("musicClass4"));
-        System.out.println(request.getParameter("musicClass1"));
         Music m = new Music();
         m.setClass1(music1);
         m.setClass2(music2);
@@ -66,13 +65,11 @@ public class ManageUploadMusicServlet extends HttpServlet {
                     bsuccess = mm.checkMusic(uploadPath + part.getSubmittedFileName());
                     if (bsuccess) {
                         PrintWriter out = response.getWriter();
-                        out.print("<script>alert('数据库已经存在该文件!');    window.location.href='ManageMusic" + ".jsp?class" +
-                                "=0'</script>");
+                        out.print("<script>alert('数据库已经存在该文件!');    window.location.href='ManageMusic" + ".jsp?class" + "=0'</script>");
                     } else {
                         mm.uploadMusic(m, part.getSubmittedFileName(), uploadPath + part.getSubmittedFileName());
                         PrintWriter out = response.getWriter();
-                        out.print("<script>alert('歌曲上传成功!');    window.location.href='ManageMusic" + ".jsp?class=0" +
-                                "'</script>");
+                        out.print("<script>alert('歌曲上传成功!');    window.location.href='ManageMusic" + ".jsp?class=0" + "'</script>");
                     }
                 }
             }

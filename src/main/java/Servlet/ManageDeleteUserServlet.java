@@ -49,16 +49,16 @@ public class ManageDeleteUserServlet extends HttpServlet {
                     number++;
                 }
                 if (number == 1) {
-                    PrintWriter out= response.getWriter();
+                    PrintWriter out = response.getWriter();
                     out.print("<script>alert('删除失败，请至少保留一位管理员!');    window.location.href='ManageUser.jsp'</script>");
                 } else {
                     a.deleteUser(u);
-                    PrintWriter out= response.getWriter();
+                    PrintWriter out = response.getWriter();
                     out.print("<script>alert('删除成功!');    window.location.href='ManageUser.jsp'</script>");
                 }
             } else {
                 a.deleteUser(u);
-                PrintWriter out= response.getWriter();
+                PrintWriter out = response.getWriter();
                 out.print("<script>alert('删除成功!');    window.location.href='ManageUser.jsp'</script>");
             }
         } catch (Exception e) {

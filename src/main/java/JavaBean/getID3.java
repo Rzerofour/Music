@@ -4,12 +4,11 @@ import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.Mp3File;
 
 import java.io.File;
-import java.io.StringReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-
+//外部批量导入歌曲，与项目主体无关！
 public class getID3 {
     public static void main(String[] args) throws Exception {
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -27,7 +26,7 @@ public class getID3 {
 
                 stmt.executeUpdate("INSERT INTO music(singer,title,url,lyric,class4) VALUES ('" + id3v2Tag.getArtist() + "', '" + id3v2Tag.getTitle() + "', '" + "music/" + f.getName() + "', '" + id3v2Tag.getLyrics() + "','" + true + "')");
             }
-            }
-            conn.close();
         }
+        conn.close();
     }
+}

@@ -36,10 +36,10 @@ public class ManageModifyMusicServlet extends HttpServlet {
             String title = request.getParameter("title");
             String singer = request.getParameter("singer");
             int ID = Integer.parseInt(request.getParameter("id"));
-            boolean music1 = Boolean.parseBoolean(request.getParameter("class1"));
-            boolean music2 = Boolean.parseBoolean(request.getParameter("class2"));
-            boolean music3 = Boolean.parseBoolean(request.getParameter("class3"));
-            boolean music4 = Boolean.parseBoolean(request.getParameter("class4"));
+            boolean music1 = Boolean.parseBoolean(request.getParameter("musicClass1"));
+            boolean music2 = Boolean.parseBoolean(request.getParameter("musicClass2"));
+            boolean music3 = Boolean.parseBoolean(request.getParameter("musicClass3"));
+            boolean music4 = Boolean.parseBoolean(request.getParameter("musicClass4"));
             Music m = new Music();
             m.setID(ID);
             m.setTitle(title);

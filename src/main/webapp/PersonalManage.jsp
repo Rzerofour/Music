@@ -51,7 +51,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="ManageMusic.jsp?class=0"><i class="fa fa-home fa-fw"
+            <a class="navbar-brand" href="PersonalManage.jsp?class=0&user=<%=user%>"><i class="fa fa-home fa-fw"
                                                                       aria-hidden="true"></i>个人中心</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">

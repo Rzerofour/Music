@@ -76,6 +76,7 @@ public class ManageUser {
         Statement stmt = conn.createStatement();
         stmt.executeUpdate("UPDATE user SET username='" + u.getUserName() + "',userpassword='" + u.getUserPassword() + "'where  username='" + delName + "'");
         stmt.executeUpdate("UPDATE mymusic SET owner='" + u.getUserName() + "'where  owner='" + delName + "' ");
+        stmt.executeUpdate("UPDATE music SET uploader='" + u.getUserName() + "'where  uploader='" + delName + "' ");
         conn.close();
     }
 

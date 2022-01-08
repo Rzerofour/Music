@@ -153,8 +153,8 @@ public class ManageMusic {
         //查询用户歌单中是否存在该歌曲，如果存在，则一同修改
         ResultSet rs = stmt.executeQuery("select * from mymusic where ID='" + u.getID() + "'");
         while (rs.next()) {
-            stmt.executeUpdate("UPDATE music SET title='" + u.getTitle() + "' , singer='" + u.getSinger() + "',class1"
-                    + "='" + u.isClass1() + "',class2='" + u.isClass2() + "',class3='" + u.isClass3() + "',class4='" + u.isClass4() + "'  where ID='" + u.getID() + "'");
+            stmt.executeUpdate("UPDATE mymusic SET title='" + u.getTitle() + "' , singer='" + u.getSinger() + "'," +
+                    "class1" + "='" + u.isClass1() + "',class2='" + u.isClass2() + "',class3='" + u.isClass3() + "',class4='" + u.isClass4() + "'  where ID='" + u.getID() + "'");
         }
         conn.close();
     }
